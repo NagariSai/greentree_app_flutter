@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "500459540161",
+    "project_id": "fitness-app-239c5",
+    "storage_bucket": "fitness-app-239c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500459540161:android:6da9c16a7a3cfe85e04e40",
+        "android_client_info": {
+          "package_name": "com.rajeevjaiswal.fitbeat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500459540161-jdc2kiku1iplepufdvm96nerue4ugcsn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rajeevjaiswal.fitbeat",
+            "certificate_hash": "739ca7e5b23b471c992580185119dfd709c62c45"
+          }
+        },
+        {
+          "client_id": "500459540161-egli8tbe0u070l9ig1lsh37v3vg9pqc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCY1hR5VjzvTwY9r18Jods6VOGgtjbvxvM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500459540161-egli8tbe0u070l9ig1lsh37v3vg9pqc6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
