@@ -7,7 +7,7 @@ import 'package:fit_beat/app/theme/app_colors.dart';
 import 'package:fit_beat/app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_video_info/flutter_video_info.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
+//import 'package:video_thumbnail/video_thumbnail.dart';
 
 class MediaWidget extends StatefulWidget {
   final File mediaFile;
@@ -139,7 +139,7 @@ class _MediaWidgetState extends State<MediaWidget> {
     );
   }
 
-  void getThumbnail() async {
+ /* void getThumbnail() async {
     uint8list = await VideoThumbnail.thumbnailData(
       video: widget.mediaFile.path,
       imageFormat: ImageFormat.JPEG,
@@ -153,12 +153,12 @@ class _MediaWidgetState extends State<MediaWidget> {
     setState(() {
       videoDuration = Utils.formatVideoDuration(data.duration);
     });
-  }
+  }*/
 
   @override
   void initState() {
     super.initState();
-    if (widget.mediaFile != null && !Utils.isFileImage(widget.mediaFile))
-      getThumbnail();
+   // if (widget.mediaFile != null && !Utils.isFileImage(widget.mediaFile))
+    //  getThumbnail();
   }
 }

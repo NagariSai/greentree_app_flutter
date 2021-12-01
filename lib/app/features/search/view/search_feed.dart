@@ -68,6 +68,7 @@ class SearchFeedWidget extends StatelessWidget {
                     fit: BoxFit.cover
                 )
             ),
+
               child: _buildBody()
           )
       );
@@ -76,29 +77,29 @@ class SearchFeedWidget extends StatelessWidget {
 
 
   Widget _buildBody() {
-
-  //  if(feedData.userMedia.length>1)
-    return new Container(
-        constraints: new BoxConstraints.expand(
-          height: 200.0,
-        ),
-        padding: new EdgeInsets.only(left: 16.0, bottom: 8.0, right: 16.0),
-        decoration: new BoxDecoration(
-          image: new DecorationImage(
-            image: new AssetImage('assets/image.jpg'),
-            fit: BoxFit.cover,
+    if (feedData.userMedia.length > 1) {
+      return new Container(
+          constraints: new BoxConstraints.expand(
+            height: 200.0,
           ),
-        ),
-        child: new Stack(
-          children: <Widget>[
-
-            new Positioned(
-              right: 0.0,
-              top: 0.0,
-              child: new Icon(Icons.double_arrow),
+          padding: new EdgeInsets.only(left: 16.0, bottom: 8.0, right: 16.0),
+          decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/image.jpg'),
+              fit: BoxFit.cover,
             ),
-          ],
-        )
-    );
+          ),
+          child: new Stack(
+            children: <Widget>[
+
+              new Positioned(
+                right: 0.0,
+                top: 0.0,
+                child: new Icon(Icons.double_arrow),
+              ),
+            ],
+          )
+      );
+    }
   }
 }
