@@ -9,16 +9,20 @@ import 'package:fit_beat/app/features/search/controller/search_controller.dart';
 import 'package:fit_beat/app/features/user_detail/views/user_detail_page.dart';
 import 'package:fit_beat/app/routes/app_pages.dart';
 import 'package:fit_beat/app/theme/app_colors.dart';
+import 'package:fit_beat/app/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainPage extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(
       builder: (s) => Scaffold(
-        appBar: AppBar(
+
+        appBar:Utils.isAppbarVisible ? AppBar(
             backgroundColor: Colors.white,
             elevation: 0,
             title: Text(
@@ -45,7 +49,10 @@ class MainPage extends StatelessWidget {
                   onPressed: () {
                     Get.toNamed(Routes.notificationPage);
                   })
-            ]),
+            ]):PreferredSize(
+          child: Container(),
+          preferredSize: Size(0.0, 0.0),
+        ),
         bottomNavigationBar: CustomBottomNavigationBar(),
         body: IndexedStack(
           index: s.selectedIndex,
@@ -111,12 +118,25 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(
-        builder: (_) => BottomNavigationBar(
+        builder: (_) =>
+
+        Container(
+          decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/images/more.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+            child:
+            BottomNavigationBar(
+              elevation: 0,
+
               selectedFontSize: 0.0,
               showSelectedLabels: false,
               showUnselectedLabels: false,
               type: BottomNavigationBarType.fixed,
-              backgroundColor: Colors.white,
+
+              backgroundColor: bottombgColor,
               selectedItemColor: primaryColor,
               unselectedItemColor: unSelectedColor,
               currentIndex: _.selectedIndex,
@@ -130,11 +150,15 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   Get.find<RecipeController>()?.loadRecipe();
                 }*/
                 else if (index == 2) {
+                 // Utils.isAppbarVisible=true;
+
                   _openAddDialog(context);
                 } else if (index == 3) {
+                 // Utils.isAppbarVisible=false;
                   _.onItemTapped(index);
                   Get.find<RecipeController>()?.loadRecipe();
                 } else {
+                 // Utils.isAppbarVisible=true;
                   Get.find<HomeController>().scrollController.jumpTo(0);
                   _.onItemTapped(index);
                 }
@@ -150,7 +174,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
                                 shape: BoxShape.circle,
                               )
                             : null,
-                        child: Center(child: Icon(Icons.home, size: 28))),
+
+                    child: Center(child:Image.asset('assets/images/home.png'))
+                    ),
                     label: "Home"),
                 BottomNavigationBarItem(
                     icon: Container(
@@ -162,25 +188,21 @@ class CustomBottomNavigationBar extends StatelessWidget {
                                 shape: BoxShape.circle,
                               )
                             : null,
-                        child: Center(child: Icon(Icons.search, size: 28))),
+                        child: Center(child:Image.asset('assets/images/search.png'))),
+                       // child: Center(child: Icon(Icons.search, size: 28))),
                     label: "Search"),
                 BottomNavigationBarItem(
+
                   label: "Add Post",
                   icon: Container(
-                    height: 28,
-                    width: 28,
+                    height: 48,
+                    width: 48,
                     decoration: BoxDecoration(
                       color: unSelectedColor,
                       shape: BoxShape.circle,
                     ),
-                    child: Center(
-                      child: Icon(
-                        Icons.add,
-                        size: 24,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                 child: Center(child:Image.asset('assets/images/plus_circle.png',))),
+                 //   child: Center(child: Icon(Icons.add,size: 24,color: Colors.white,),), ),
                 ),
                 BottomNavigationBarItem(
                   icon: Container(
@@ -192,7 +214,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
                               shape: BoxShape.circle,
                             )
                           : null,
-                      child: Center(child: Icon(Icons.rice_bowl, size: 28))),
+                   child: Center(child:Image.asset('assets/images/receipe.png'))),
+                    //  child: Center(child: Icon(Icons.rice_bowl, size: 28))),
                   label: "Recipe",
                 ),
                 BottomNavigationBarItem(
@@ -205,13 +228,34 @@ class CustomBottomNavigationBar extends StatelessWidget {
                               shape: BoxShape.circle,
                             )
                           : null,
-                      child: Center(child: Icon(Icons.menu, size: 28))),
+                      child: Center(child:Image.asset('assets/images/user.png'))),
+                     // child: Center(child: Icon(Icons.menu, size: 28))),
                   label: "Menu",
                 ),
               ],
-            ));
+            ))
+    );
   }
 
+
+  /*Container(
+  decoration: BoxDecoration(
+  image: DecorationImage(image: AssetImage('assets/images/bottombar.png'), fit: BoxFit.fill),
+  ),
+  child: BottomNavigationBar(
+  backgroundColor: bottombgColor,
+  type: BottomNavigationBarType.fixed, // new line
+  elevation: 0,
+  items: [
+  BottomNavigationBarItem(icon: Image.asset("assets/images/home.png")),
+  BottomNavigationBarItem(icon: Image.asset("assets/images/search.png"),),
+  BottomNavigationBarItem(icon: Image.asset("assets/images/plus_circle.png"),),
+  BottomNavigationBarItem(icon: Image.asset("assets/images/receipe.png")),
+  BottomNavigationBarItem(icon: Image.asset("assets/images/user.png")),
+
+  ],
+  ),
+  ),*/
   void _openAddDialog(BuildContext context) {
     /// postType 0 => Start a discussion, 1 => Post your challenge, 2 => Post an update,
     showCupertinoModalPopup(

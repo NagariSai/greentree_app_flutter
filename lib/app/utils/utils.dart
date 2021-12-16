@@ -20,7 +20,7 @@ class Utils {
       Navigator.of(context).pop();
     }
   }
-
+  static bool isAppbarVisible=true;
   static String convertEpochToMonth(int dateTime) {
     print("epoch $dateTime");
     if (dateTime == null) return "";
@@ -342,5 +342,20 @@ class Utils {
         break;
     }
     return coachExp;
+  }
+
+  static String getCurrentDate(){
+
+    var date = new DateTime.now().toString();
+
+    var dateParse = DateTime.parse(date);
+    var format = DateFormat.yMMMEd();
+    return format.format(new DateTime.now());
+    //var formattedDate = "${dateParse.day}-${dateParse.month}-${dateParse.year}";
+
+   //  return formattedDate.toString() ;
+
+
+
   }
 }

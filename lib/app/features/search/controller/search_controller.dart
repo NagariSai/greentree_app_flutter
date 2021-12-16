@@ -14,12 +14,13 @@ class SearchController extends GetxController {
   TextEditingController searchController = TextEditingController();
 
   bool showIcon = false;
-
-
+  var indicator = new GlobalKey<RefreshIndicatorState>();
+  bool isRefresh = false;
+  int pageNo = 1;
   @override
   void onInit() {
     super.onInit();
-    searchData("test");
+    searchData("rayudu");
   }
 
   searchData(String query) async {
@@ -36,6 +37,41 @@ class SearchController extends GetxController {
       feedList.clear();
       print("search error : ${e.toString()}");
     }
+  }
+  loadNextsearchData(String query) async {
+    try {
+      pageNo++;
+      if (pageNo == 1 && !isRefresh) {
+        isLoading.value = true;
+        update();
+      }
+
+
+      //isLoading.value = true;
+      var response = await repository.searchData(query: query);
+      isLoading.value = false;
+      if (response.status && response.data != null) {
+        // feedList.clear();
+        feedList.addAll(response.data.feeds);
+      }
+    } catch (e) {
+      isLoading.value = false;
+      feedList.clear();
+      print("search error : ${e.toString()}");
+    }
+  }
+  void refreshFeeds() {
+    indicator.currentState.show();
+    //reloadFeeds();
+    loadNextsearchData("test");
+  }
+
+  Future<void> reloadFeeds() async {
+    isRefresh = true;
+
+    pageNo = 1;
+    await loadNextsearchData("test");
+    isRefresh = false;
   }
 
   updateCloseIcon(String query) {

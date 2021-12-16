@@ -13,6 +13,10 @@ const Map<int, Color> blue = const <int, Color>{
   900: Color(0xFF012744),
 };
 
+
+const Color appbgColor = Color(0xFF318448);
+const Color bottombgColor = Color(0xFFF4FCF3);
+
 const Color primaryColor = Color(0xFF025074);
 const Color titleBlackColor = Color(0xFF050707);
 const Color errorColor = Color(0xFFDB0412);

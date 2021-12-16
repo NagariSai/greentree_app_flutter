@@ -1,3 +1,4 @@
+import 'package:fit_beat/app/common_widgets/image_view.dart';
 import 'package:fit_beat/app/data/model/feed/feed_response.dart';
 import 'package:fit_beat/app/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,13 +26,11 @@ class SearchFeedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  //  print(feedData.userMedia[0].mediaType);
 
       return InkWell(
           onTap: () {
+
             if (feedData.type == 1) {
-
-
               Get.toNamed(Routes.discussion_detail_page, arguments: [
                 feedData.uniqueId,
                 feedData.type,
@@ -59,17 +58,24 @@ class SearchFeedWidget extends StatelessWidget {
           },
 
           child: Container(
+
             padding: const EdgeInsets.only(
                 left: 16, right: 16, top: 16, bottom: 4),
             decoration: BoxDecoration(
+                border: Border.all(
+                  width: 0, //
+                  color: Colors.white//                 <--- border width here
+                ),
                 borderRadius: BorderRadius.circular(2),
                 image: DecorationImage(
                     image: NetworkImage(feedData.userMedia[0].mediaUrl),
+
                     fit: BoxFit.cover
+
                 )
             ),
+            child: _buildBody()
 
-              child: _buildBody()
           )
       );
 
@@ -77,29 +83,46 @@ class SearchFeedWidget extends StatelessWidget {
 
 
   Widget _buildBody() {
-    if (feedData.userMedia.length > 1) {
+
       return new Container(
           constraints: new BoxConstraints.expand(
-            height: 200.0,
+            height: 20.0,
           ),
-          padding: new EdgeInsets.only(left: 16.0, bottom: 8.0, right: 16.0),
-          decoration: new BoxDecoration(
+          padding: new EdgeInsets.only(left: 8.0, bottom: 8.0, right: 8.0),
+         /* decoration: new BoxDecoration(
             image: new DecorationImage(
-              image: new AssetImage('assets/image.jpg'),
+              image: new AssetImage('assets/more.png'),
               fit: BoxFit.cover,
             ),
-          ),
+          ),*/
+
           child: new Stack(
             children: <Widget>[
+              if (feedData.userMedia.length > 1)
+
 
               new Positioned(
                 right: 0.0,
                 top: 0.0,
-                child: new Icon(Icons.double_arrow),
+                child: Image.asset('assets/images/more.png'),
               ),
             ],
           )
       );
-    }
+
   }
 }
+
+/*
+new Positioned(
+right: 0.0,
+top: 0.0,
+child: Container(
+margin: EdgeInsets.all(16.0),
+child:Column(
+children: <Widget>[
+Image.asset('assets/images/play.png', scale: 2.5),
+
+]
+),
+))*/

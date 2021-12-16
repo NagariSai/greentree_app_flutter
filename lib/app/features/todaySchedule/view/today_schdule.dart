@@ -40,26 +40,32 @@ class _TodaySchedulePageState extends State<TodaySchedulePage>
           Get.toNamed(Routes.myPlanCoachPage);
         },
         positiveText: "My Plan & Coach",
+
         positiveTextColor: FF55B5FE,
       ),
       body: Container(
+        color: FFE0EAEE,
         child: Column(
           children: [
-            Divider(
+          /*  Divider(
               color: FFB0B8BB,
-            ),
+            ),*/
             Container(
+              decoration: new BoxDecoration(
+                color: FFE0EAEE,
+              ),
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: CommonContainer(
                 height: 44,
                 width: Get.width,
-                borderRadius: 38,
+                borderRadius: 0,
                 backgroundColor: FFE0EAEE,
                 child: TabBar(
                   labelStyle: TextStyle(
-                      color: FF050707,
+                      color: Colors.white,
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
+
                       fontFamily: FontFamily.poppins),
                   unselectedLabelStyle: TextStyle(
                       color: FF868A8C,
@@ -68,11 +74,11 @@ class _TodaySchedulePageState extends State<TodaySchedulePage>
                       fontFamily: FontFamily.poppins),
                   isScrollable: false,
                   unselectedLabelColor: FF868A8C,
-                  labelColor: FF050707,
+                  labelColor: Colors.white,
                   indicatorSize: TabBarIndicatorSize.label,
                   indicator: CustomTabIndicator(
                     indicatorHeight: 31.0,
-                    indicatorColor: FFFFFFFF,
+                    indicatorColor: Colors.green,
                     indicatorRadius: 40,
                   ),
                   tabs: tabs,
@@ -80,11 +86,12 @@ class _TodaySchedulePageState extends State<TodaySchedulePage>
                 ),
               ),
             ),
-            Divider(
+         /*   Divider(
               color: FFB0B8BB,
-            ),
+            ),*/
             Expanded(
                 child: TabBarView(
+
               controller: _tabController,
               children: [
                 NutritionPage(),

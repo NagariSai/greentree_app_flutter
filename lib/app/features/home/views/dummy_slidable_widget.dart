@@ -54,7 +54,7 @@ class _DummyMediaSlidableWidgetState extends State<DummyMediaSlidableWidget> {
                           ],
                         )
                       : videoPlayerController != null &&
-                              videoPlayerController.value.initialized
+                              videoPlayerController.value.isInitialized
                           ? Stack(children: [
                               GestureDetector(
                                 onTap: () {

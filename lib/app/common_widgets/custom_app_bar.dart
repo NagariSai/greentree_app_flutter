@@ -37,6 +37,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       titleSpacing: 0,
       automaticallyImplyLeading: false,
       elevation: elevation,
+
       leading: IconButton(
         icon: Icon(
           Icons.chevron_left,

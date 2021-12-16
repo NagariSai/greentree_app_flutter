@@ -90,4 +90,5 @@ class Assets {
   static const String comingSoon = "assets/images/comming_soon.png";
   static const String ic_filter = "assets/images/ic_filter.png";
   static const String coach_success = "assets/images/coach_sucess.png";
+
 }

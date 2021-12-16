@@ -15,9 +15,10 @@ class VideoWidget extends StatefulWidget {
   final int totalPage;
   final int uniqueId;
   final int mediaId;
-
+  final bool play;
   const VideoWidget(
       {Key key,
+      @required this.play,
       @required this.url,
       @required this.viewCount,
       @required this.currentPage,
