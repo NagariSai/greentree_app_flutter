@@ -557,6 +557,7 @@ class _SelectFoodRowState extends State<SelectFoodRow> {
     });
   }*/
 
+
   Future<List<Serving>> _fetchServings1(String foodid) async {
     final response = await http.post(
       Uri.parse('http://fitness-api.nsdcare.com/getServings'),
@@ -569,6 +570,8 @@ class _SelectFoodRowState extends State<SelectFoodRow> {
         'food_id': foodid,
       }),
     );
+
+
 
     if (response.statusCode == 200) {
 

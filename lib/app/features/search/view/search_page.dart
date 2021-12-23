@@ -12,7 +12,10 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:inview_notifier_list/inview_notifier_list.dart';
+import 'package:after_layout/after_layout.dart';
+import 'inview_video_widget.dart';
 class SearchPage extends StatefulWidget  {
+
 
   @override
   _ItemGridViewState createState() => _ItemGridViewState();
@@ -21,12 +24,35 @@ class SearchPage extends StatefulWidget  {
 
 
 
-   class _ItemGridViewState extends State<SearchPage> {
+   class _ItemGridViewState extends State<SearchPage> with AfterLayoutMixin<SearchPage>{
    ScrollController scrollController = ScrollController();
+   bool isInView=false;
+   GlobalKey _keyRed = GlobalKey();
 
+   @override
+   void afterFirstLayout(BuildContext context) {
+     //showHelloWorld();
+    // WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
+   }
+   void showHelloWorld() {
+     showDialog(
+       context: context,
+       builder: (context) => new AlertDialog(
+         content: new Text('Hello World'),
+         actions: <Widget>[
+           new FlatButton(
+             child: new Text('DISMISS'),
+             onPressed: () => Navigator.of(context).pop(),
+           )
+         ],
+       ),
+     );
+   }
    @override
    void initState() {
        super.initState();
+
+
        scrollController.addListener(() {
 
          if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
@@ -37,19 +63,30 @@ class SearchPage extends StatefulWidget  {
             // Get.find<SearchController>().addItem(Get.find<SearchController>().feedList.length);
          }
 
+
        });
    }
+   _afterLayout(_) {
+
+     _getPositions();
+   }
+   _getPositions() {
+     final RenderBox renderBoxRed = _keyRed.currentContext.findRenderObject();
+     final positionRed = renderBoxRed.localToGlobal(Offset.zero);
+     print("POSITION of Red: $positionRed ");
+   }
+
    @override
    Widget build(BuildContext context) {
 
-
      return Scaffold(
+          backgroundColor: bodybgColor,
        appBar: AppBar(
            backgroundColor: appbgColor,
            titleSpacing: 0,
            automaticallyImplyLeading: false,
            elevation: 1,
-           leading: IconButton(
+       /*    leading: IconButton(
              icon: Icon(
                Icons.chevron_left,
                size: 28,
@@ -57,10 +94,10 @@ class SearchPage extends StatefulWidget  {
              ),
              onPressed: () => Get.back(),
              color: primaryColor,
-           ),
+           ),*/
            title: GetBuilder<SearchController>(builder: (_) {
              return Padding(
-                 padding: const EdgeInsets.only(right: 16),
+                 padding: const EdgeInsets.only(left: 16,right: 16),
                  child: NormalTextField(
                    controller: _.searchController,
 
@@ -92,7 +129,9 @@ class SearchPage extends StatefulWidget  {
        ),
 
        body: GetX<SearchController>(
+
          init: SearchController(repository: ApiRepository(apiClient: ApiClient())),
+
          builder: (_) => _.isLoading.value
              ? Center(
            child: CircularProgressIndicator(),
@@ -100,6 +139,7 @@ class SearchPage extends StatefulWidget  {
              : LazyLoadScrollView(
            onEndOfPage: () => _.loadNextsearchData("test"),
          //  isLoading: _.feedLastPage,
+
            child: RefreshIndicator(
              key: _.indicator,
              onRefresh: _.reloadFeeds,
@@ -111,9 +151,12 @@ class SearchPage extends StatefulWidget  {
 
                    Flexible(
                      fit: FlexFit.loose,
+
+
                       child : _.feedList.length > 0
 
                    ? StaggeredGridView.countBuilder(
+
 
                        staggeredTileBuilder: (int index) =>
                            _.feedList[index].totalLikes == 0 ? StaggeredTile.count(1,1) : StaggeredTile.count(2,1),
@@ -124,7 +167,10 @@ class SearchPage extends StatefulWidget  {
                      shrinkWrap: true,
 
 
+
            itemBuilder: (context, index) {
+
+
 
              if(_.feedList[index].userMedia[0].mediaType==1) {
                return SearchFeedWidget(
@@ -133,25 +179,41 @@ class SearchPage extends StatefulWidget  {
              }
              else
              {
-               print( "mdeia::"+_.feedList[index].userMedia[0].mediaUrl);
+             //  print( "mdeia::"+_.feedList[index].userMedia[0].mediaUrl);
 
-              /* return InViewNotifierWidget(
-                 id: '$index',
-                 builder:
-                     (BuildContext context, bool isInView, Widget? child) {
-                   return VideoWidget(
-                       play: isInView,
-                       url:
-                       _.feedList[index].userMedia[0].mediaUrl);
+               /*  return InViewNotifierList(
+                 isInViewPortCondition:
+                     (double deltaTop, double deltaBottom, double vpHeight) {
+                   return deltaTop < (0.5 * vpHeight) && deltaBottom > (0.5 * vpHeight);
+                 },
+                 itemCount:  1,
+                 builder: (BuildContext context, int index) {
+                   return InViewNotifierWidget(
+                     id: '$index',
+                     builder: (BuildContext context, bool isInView, Widget child) {
+                       return InViewNotifierWidget(
+                         id: '$index',
+                         builder:
+                             (BuildContext context, bool isInView, Widget child) {
+                           return InViewVideoWidget(
+                               play: isInView,
+                               url:
+                               _.feedList[index].userMedia[0].mediaUrl);
+                         },
+                       );
+                     },
+                   );
                  },
                );*/
 
-               return VideoWidget( url: _.feedList[index].userMedia[0].mediaUrl,
+
+              return VideoWidget( url: _.feedList[index].userMedia[0].mediaUrl,
                  currentPage: 0,
                  totalPage: 1,
                  viewCount: 0,
                );
              }
+             key: _keyRed;
            },
 
 
@@ -248,4 +310,6 @@ class SearchPage extends StatefulWidget  {
      );
    }
    }
+
+
 

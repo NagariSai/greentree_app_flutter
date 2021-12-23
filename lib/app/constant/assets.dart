@@ -58,10 +58,11 @@ class Assets {
   static const String playIcon = "assets/images/play.png";
   static const String videoCountIcon = "assets/images/video_count.png";
   static const String juiceIcon = "assets/images/juice.png";
-  static const String lunchIcon = "assets/images/lunch.png";
+  static const String lunchIcon = "assets/images/td_lunch.png";
   static const String saladIcon = "assets/images/salad.png";
-  static const String snacksIcon = "assets/images/snacks.png";
-  static const String breakfastIcon = "assets/images/breakfast.png";
+  static const String snacksIcon = "assets/images/td_snacks.png";
+  static const String breakfastIcon = "assets/images/td_breakfast.png";
+  static const String dinnerIcon = "assets/images/dinner.png";
   static const String ic_camera = "assets/images/ic_camera.png";
 
   static const String ic_italian = "assets/images/ic_italian.png";

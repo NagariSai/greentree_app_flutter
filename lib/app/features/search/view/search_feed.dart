@@ -16,10 +16,10 @@ class SearchFeedWidget extends StatelessWidget {
 
 
 
-  const SearchFeedWidget({Key key,
-    @required this.feedData,
-    this.onClickLikeUnLike,
-    this.onClickBookmark})
+  const SearchFeedWidget({ Key key,
+     this.feedData,
+     this.onClickLikeUnLike,
+     this.onClickBookmark})
       : super(key: key);
 
 

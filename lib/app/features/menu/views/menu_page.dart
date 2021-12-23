@@ -19,6 +19,7 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var data = PrefData().getUserData();
     return Scaffold(
+        backgroundColor: bodybgColor,
         body: GetBuilder<MenuController>(
       init: MenuController(repository: ApiRepository(apiClient: ApiClient())),
       builder: (_) => Column(

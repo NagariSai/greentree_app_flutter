@@ -18,19 +18,23 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodybgColor,
       body: GetBuilder<HomeController>(
         init: HomeController(repository: ApiRepository(apiClient: ApiClient())),
         builder: (_) => _.isLoading
             ? Center(
                 child: CircularProgressIndicator(),
               )
+
             : LazyLoadScrollView(
                 onEndOfPage: () => _.loadNextFeed(),
                 isLoading: _.feedLastPage,
                 child: RefreshIndicator(
+
                   key: _.indicator,
                   onRefresh: _.reloadFeeds,
                   child: SingleChildScrollView(
+
                     controller: _.scrollController,
                     padding: const EdgeInsets.only(bottom: 16),
                     child: Column(
@@ -59,7 +63,8 @@ class HomePage extends StatelessWidget {
                                 Text(
                                   "Today's schedule",
                                   style: TextStyle(
-                                      fontSize: 14, color: titleBlackColor),
+                                      fontSize: 18, color: titleBlackColor,
+                                      fontWeight: FontWeight.bold),
                                 )
                               ],
                             ),
@@ -212,7 +217,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         Divider(
-                          thickness: 4,
+                          thickness: 1,
                           color: dividerColor,
                         ),
                         _.coachList.length > 0
@@ -338,7 +343,7 @@ class HomePage extends StatelessWidget {
                             : Container(),
                         _.coachList.length > 0
                             ? Divider(
-                                thickness: 4,
+                                thickness: 1,
                                 color: dividerColor,
                               )
                             : Container(),
@@ -444,7 +449,7 @@ class HomePage extends StatelessWidget {
                               ),
                             ],*/
                         Divider(
-                          thickness: 4,
+                          thickness: 1,
                           color: dividerColor,
                         ),
                         Flexible(
@@ -461,7 +466,7 @@ class HomePage extends StatelessWidget {
                                   },
                                   separatorBuilder: (context, index) {
                                     return Divider(
-                                      thickness: 4,
+                                      thickness: 1,
                                       color: dividerColor,
                                     );
                                   },

@@ -33,7 +33,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: appbgColor,
       titleSpacing: 0,
       automaticallyImplyLeading: false,
       elevation: elevation,
@@ -41,6 +41,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       leading: IconButton(
         icon: Icon(
           Icons.chevron_left,
+          color: bottombgColor,
           size: 28,
         ),
         onPressed: () {
@@ -51,13 +52,13 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             onBackPressClick.call();
           }
         },
-        color: primaryColor,
+        color: bottombgColor,
       ),
       title: title != null
           ? CustomText(
               text: title,
-              size: 20,
-              color: FF050707,
+              size: 18,
+              color: bottombgColor,
               fontWeight: FontWeight.bold,
             )
           : null,
@@ -67,8 +68,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                 onPressed: onNegativeTap,
                 child: CustomText(
                   text: negativeText,
-                  color: primaryColor,
-                  size: 16,
+                  color: bottombgColor,
+                  size: 14,
                 ),
               )
             : Container(),
@@ -77,7 +78,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                 onPressed: onPositiveTap,
                 child: CustomText(
                   text: positiveText,
-                  color: primaryColor,
+                  color: bottombgColor,
                   fontWeight: FontWeight.w600,
                   size: 16,
                 ),

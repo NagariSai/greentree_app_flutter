@@ -146,14 +146,14 @@ class AddFoodNutritionController extends GetxController {
   }
 
   void addFood() async {
-    if (title.value.isEmpty) {
+    if ( title.value.isEmpty) {
       Utils.showErrorSnackBar("Please enter recipe name");
-    } else if (selectedFoodTypeId == null) {
+    }else if (selectedFoodTypeId == null) {
       Utils.showErrorSnackBar("Please select food type");
     } else if (selectedCategoryId == null) {
       Utils.showErrorSnackBar("Please select category type");
     } else if (quantityController.text.toString().isEmpty) {
-      Utils.showErrorSnackBar("Please enter quatity");
+      Utils.showErrorSnackBar("Please enter quantity");
     } else if (caloriesMap.value["protein"] == 0) {
       Utils.showErrorSnackBar("Please enter protein");
     } else if (caloriesMap.value["carb"] == 0) {

@@ -42,7 +42,7 @@ class SelectFood extends StatelessWidget {
                 : Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
                         child: NormalTextField(
                           controller: _.searchController,
                           bgColor: settingBgColor,

@@ -1,11 +1,16 @@
+import 'package:fit_beat/app/common_widgets/custom_text.dart';
+import 'package:fit_beat/app/constant/font_family.dart';
 import 'package:fit_beat/app/data/model/schedule_activity_list_model.dart';
 import 'package:fit_beat/app/data/provider/custom_exception.dart';
 import 'package:fit_beat/app/data/repository/api_repository.dart';
+import 'package:fit_beat/app/theme/app_colors.dart';
 import 'package:fit_beat/app/utils/dialog_utils.dart';
 import 'package:fit_beat/app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class NutritionController extends GetxController {
   final ApiRepository repository;
@@ -197,4 +202,283 @@ class NutritionController extends GetxController {
     Colors.purple,
     Colors.deepOrangeAccent,
   ];
+
+
+  Widget nutritionBody() {
+
+    return new Container(
+
+
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      width: double.infinity,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            width: 140,
+            height: 140,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              // color: Color.fromRGBO(242, 244, 255, 1),
+              color: Colors.white,
+            ),
+          ),
+          CircularPercentIndicator(
+            backgroundColor: Color.fromRGBO(242, 244, 255, 1),
+            radius: 140.0,
+            lineWidth: 4.0,
+            percent: getNutritionPercentage(),
+            center: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomText(
+                  text: "${kCalIntake}",
+                  color: FF050707,
+                  size: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                CustomText(
+                  text: "of",
+                  color: FF6D7274,
+                  size: 11,
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                CustomText(
+                  text: "${kCal} Kcal",
+                  color: FF050707,
+                  size: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ],
+            ),
+            progressColor:
+            isCalExceed ? FFFF9B91 : FF6BD295,
+          ),
+          Positioned.fill(
+            top: -15,
+            right: -5,
+            child: Align(
+              alignment: Alignment.topRight,
+              child: TextButton(
+
+                onPressed: () async {
+                  String result =
+                  await DialogUtils.setKCalDialog();
+                  if (result != null && result != "") {
+                   // setState(() {
+                      kCal = int.parse(result);
+                      updateKcal();
+                   // });
+                  }
+                },
+
+                child: CustomText(
+                  text: "Set Kcal Limit",
+                  size: 13,
+                  color: customTextColor,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Row(
+
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+
+              Column(
+                children: [
+                  CustomText(
+                    text: "PROTEIN",
+                    size: 14,
+                    color: Colors.green,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(0.0),
+                    child: new LinearPercentIndicator(
+                      // width: MediaQuery.of(context).size.width - 50,
+                      width:  70,
+                      animation: true,
+                      lineHeight: 3.0,
+                      animationDuration: 1500,
+                      percent: totalProteins,
+                      center: Text(""),
+                      linearStrokeCap: LinearStrokeCap.roundAll,
+                      progressColor: Colors.green,
+                    ),
+                  ),
+                  /* Container(
+                                    height: 18,
+                                    width: 18,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.green.withOpacity(0.8)),
+                                  ),*/
+                  SizedBox(
+                    height: 3,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: totalProteins.toStringAsFixed(1),
+                      style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: FontFamily.poppins),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: " g",
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  CustomText(
+                    text: "CARBS",
+                    size: 14,
+                    color: Colors.orangeAccent,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(0.0),
+                    child: new LinearPercentIndicator(
+                      // width: MediaQuery.of(context).size.width - 50,
+                      width:  60,
+                      animation: true,
+                      lineHeight: 3.0,
+                      animationDuration: 1500,
+                      percent: totalCarbs,
+                      center: Text(""),
+                      linearStrokeCap: LinearStrokeCap.roundAll,
+                      progressColor: Colors.orangeAccent,
+                    ),
+                  ),
+                  /*   Container(
+                                    height: 18,
+                                    width: 18,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.orangeAccent.withOpacity(0.8)),
+                                  ),*/
+                  SizedBox(
+                    height: 3,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: totalCarbs.toStringAsFixed(1),
+                      style: TextStyle(
+                          color: Colors.orangeAccent,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: FontFamily.poppins),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: " g",
+                          style: TextStyle(
+                            color: Colors.orangeAccent,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  CustomText(
+                    text: "FAT",
+                    size: 14,
+                    color: Colors.red,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(0.0),
+                    child: new LinearPercentIndicator(
+                      // width: MediaQuery.of(context).size.width - 50,
+                      width:  50,
+                      animation: true,
+                      lineHeight: 3.0,
+                      animationDuration: 1500,
+                      percent: totalFats,
+                      center: Text(""),
+                      linearStrokeCap: LinearStrokeCap.roundAll,
+                      progressColor: Colors.red,
+                    ),
+                  ),
+                  /*   Container(
+                                    height: 18,
+                                    width: 18,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.red.withOpacity(0.8)),
+                                  ),*/
+                  SizedBox(
+                    height: 3,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: totalFats.toStringAsFixed(1),
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: FontFamily.poppins),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: " g",
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+
+          SizedBox(
+            height: 18,
+          ),
+        ],
+
+      ),
+
+
+
+
+    );
+
+  }
+
 }

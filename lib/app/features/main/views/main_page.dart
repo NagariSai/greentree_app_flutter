@@ -1,6 +1,12 @@
+import 'dart:convert';
+//import 'dart:html';
+
+import 'package:dio/dio.dart';
 import 'package:fit_beat/app/common_widgets/custom_text.dart';
 import 'package:fit_beat/app/constant/assets.dart';
+import 'package:fit_beat/app/data/model/auth/login_response.dart';
 import 'package:fit_beat/app/data/provider/api.dart';
+import 'package:fit_beat/app/data/provider/dio_client.dart';
 import 'package:fit_beat/app/data/repository/api_repository.dart';
 import 'package:fit_beat/app/features/home/controllers/home_controller.dart';
 import 'package:fit_beat/app/features/main/controllers/main_controller.dart';
@@ -13,6 +19,7 @@ import 'package:fit_beat/app/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class MainPage extends StatelessWidget {
 
@@ -23,19 +30,20 @@ class MainPage extends StatelessWidget {
       builder: (s) => Scaffold(
 
         appBar:Utils.isAppbarVisible ? AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor:appbgColor,
             elevation: 0,
             title: Text(
               s.titleName,
               style: TextStyle(
-                  fontSize: 28,
-                  color: titleBlackColor,
+                  fontSize: 22,
+                  color: bottombgColor,
                   fontWeight: FontWeight.bold),
             ),
             actions: [
               IconButton(
                   icon: Image.asset(
                     Assets.chat,
+                    color: bottombgColor,
                     width: 24,
                     height: 24,
                   ),
@@ -43,6 +51,7 @@ class MainPage extends StatelessWidget {
               IconButton(
                   icon: Image.asset(
                     Assets.bell,
+                    color: bottombgColor,
                     width: 24,
                     height: 24,
                   ),
@@ -57,6 +66,8 @@ class MainPage extends StatelessWidget {
         body: IndexedStack(
           index: s.selectedIndex,
           children: s.pageList,
+
+
         ),
       ),
     );
@@ -90,7 +101,9 @@ class MainPage extends StatelessWidget {
                               width: 24,
                               height: 24,
                             ),
-                            onPressed: () {}),
+                            onPressed: () {
+
+                            }),
                         IconButton(
                             icon: Image.asset(
                               Assets.bell,
@@ -103,12 +116,15 @@ class MainPage extends StatelessWidget {
                   body: IndexedStack(
                     index: s.selectedIndex,
                     children: s.pageList,
+
                   ),
                 ),
               )
             : UserDetailPage());
   }
 }
+
+
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({
@@ -137,28 +153,30 @@ class CustomBottomNavigationBar extends StatelessWidget {
               type: BottomNavigationBarType.fixed,
 
               backgroundColor: bottombgColor,
-              selectedItemColor: primaryColor,
+
+              selectedItemColor: titleBlackColor,
               unselectedItemColor: unSelectedColor,
               currentIndex: _.selectedIndex,
               onTap: (index) {
                 if (index == 1) {
-                 // _.onItemTapped(index);
-                 Get.toNamed(Routes.searchPage);
+                  Utils.isAppbarVisible=false;
+                  _.onItemTapped(index);
+               //  Get.toNamed(Routes.searchPage);
                 }
                /* if (index == 1) {
                   _.onItemTapped(index);
                   Get.find<RecipeController>()?.loadRecipe();
                 }*/
                 else if (index == 2) {
-                 // Utils.isAppbarVisible=true;
+                  Utils.isAppbarVisible=true;
 
                   _openAddDialog(context);
                 } else if (index == 3) {
-                 // Utils.isAppbarVisible=false;
+                  Utils.isAppbarVisible=true;
                   _.onItemTapped(index);
                   Get.find<RecipeController>()?.loadRecipe();
                 } else {
-                 // Utils.isAppbarVisible=true;
+                  Utils.isAppbarVisible=true;
                   Get.find<HomeController>().scrollController.jumpTo(0);
                   _.onItemTapped(index);
                 }

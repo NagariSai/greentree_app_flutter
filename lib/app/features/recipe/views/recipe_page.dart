@@ -14,6 +14,7 @@ class RecipePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodybgColor,
       body: GetBuilder<RecipeController>(
           init: RecipeController(
               repository: ApiRepository(apiClient: ApiClient())),

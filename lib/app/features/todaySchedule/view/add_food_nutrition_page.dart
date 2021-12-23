@@ -28,7 +28,7 @@ class AddFoodNutritionPage extends StatelessWidget {
                     _.userDetailData.value != null &&
                     _.masterCategoryEntity.value.data != null)
                 ? Container(
-                    color: Colors.white,
+                    color: bodybgColor,
                     child: SafeArea(
                       child: Scaffold(
                         appBar: CustomAppBar(
@@ -40,7 +40,7 @@ class AddFoodNutritionPage extends StatelessWidget {
                             _.addFood();
                           },
                         ),
-                        backgroundColor: Colors.white,
+                        backgroundColor: bodybgColor,
                         body:
                             OrientationBuilder(builder: (context, orientation) {
                           return LayoutBuilder(builder: (BuildContext context,

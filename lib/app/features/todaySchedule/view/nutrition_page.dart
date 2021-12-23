@@ -14,6 +14,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'nutrition_food_row.dart';
 
@@ -26,6 +27,15 @@ class NutritionPage extends StatefulWidget {
 
 class _NutritionPageState extends State<NutritionPage> {
 
+
+
+  /*void _updateMyItems(int oldIndex, int newIndex) {
+    if (newIndex > oldIndex) {
+      newIndex -= 1;
+    }
+    final String item = asNutritions.removeAt(oldIndex);
+    _.asNutritions.insert(newIndex, item);
+  }*/
   String finalDate = Utils.getCurrentDate();
 
   bool viewVisible = false ;
@@ -40,7 +50,6 @@ class _NutritionPageState extends State<NutritionPage> {
       viewVisible = false ;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<NutritionController>(
@@ -49,7 +58,8 @@ class _NutritionPageState extends State<NutritionPage> {
         builder: (_) {
           return SingleChildScrollView(
             child: Container(
-              color: Colors.white,
+
+              color: bodybgColor,
               child: Column(children: [
                   Visibility(
                   maintainSize: false,
@@ -66,40 +76,204 @@ class _NutritionPageState extends State<NutritionPage> {
                 ),
                   ),
 
-               /* CustomText(
-                  text: finalDate,
+                Row(
 
-                  size: 14,
-                  color: FF050707,
-                  fontWeight: FontWeight.w600,
-                ),*/
-                TextButton(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
 
-                  onPressed: () {
-                    if(viewVisible)
-                      hideWidget();
-                    else
-                      showWidget();
-                  },
+                    Column(
+                      children: [
+                        TextButton(
 
-                  child: Text(
+                          onPressed: () {
+                            if(viewVisible)
+                              hideWidget();
+                            else
+                              showWidget();
+                          },
 
-                      finalDate, //title
-                      textAlign: TextAlign.center,
+                          child: Text(
 
-                      style: TextStyle(color:FF050707)
-                  ),
+                              finalDate, //title
+                              textAlign: TextAlign.center,
 
+                              style: TextStyle(color:customTextColor)
+                          ),
+
+                        ),
+
+                      ],
+                    ),
+
+                 /*   Column(
+                      children: [
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.black45,
+                          size: 24,
+                        ),
+                      ],
+                    )*/
+                  ],
                 ),
+
                 _.isLoading
                     ? Container(
                         height: Get.height * 0.2,
                         child: Center(child: CircularProgressIndicator()))
                     : Column(
                         children: [
-                          const SizedBox(height: 16),
-                          Container(
 
+                          const SizedBox(height: 16),
+                        /*  Row(
+
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+
+                              Column(
+                                children: [
+
+                                  RichText(
+                                    text: TextSpan(
+                                      text: "0",
+                                      style: TextStyle(
+                                          color: Colors.black54,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: FontFamily.poppins),
+
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 2,
+                                  ),
+                                  CustomText(
+                                    text: "EATEN",
+                                    size: 14,
+
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                  children: [
+                                Container(
+
+
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  //width: double.infinity,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Container(
+                                        width: 140,
+                                        height: 140,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          // color: Color.fromRGBO(242, 244, 255, 1),
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      CircularPercentIndicator(
+                                        backgroundColor: Color.fromRGBO(242, 244, 255, 1),
+                                        radius: 140.0,
+                                        lineWidth: 4.0,
+                                        percent: _.getNutritionPercentage(),
+                                        center: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            CustomText(
+                                              text: "${_.kCalIntake}",
+                                              color: FF050707,
+                                              size: 18,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            SizedBox(
+                                              height: 2,
+                                            ),
+                                            CustomText(
+                                              text: "of",
+                                              color: FF6D7274,
+                                              size: 11,
+                                            ),
+                                            SizedBox(
+                                              height: 2,
+                                            ),
+                                            CustomText(
+                                              text: "${_.kCal} Kcal",
+                                              color: FF050707,
+                                              size: 12,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ],
+                                        ),
+                                        progressColor:
+                                        _.isCalExceed ? FFFF9B91 : FF6BD295,
+                                      ),
+                                   *//* Positioned.fill(
+                                        top: -15,
+                                        right: -15,
+
+                                        child: Align(
+                                          alignment: Alignment.topRight,
+                                          child: TextButton(
+
+                                            onPressed: () async {
+                                              String result =
+                                              await DialogUtils.setKCalDialog();
+                                              if (result != null && result != "") {
+                                                setState(() {
+                                                  _.kCal = int.parse(result);
+                                                  _.updateKcal();
+                                                });
+                                              }
+                                            },
+
+                                            child: CustomText(
+                                              text: "Set Kcal Limit",
+                                              size: 14,
+                                              color: customTextColor,
+                                            ),
+                                          ),
+                                        ),
+                                      )*//*
+                                    ],
+                                  ),
+                                ),
+                                 ],
+                              ),
+                              Column(
+                                children: [
+
+
+                                  RichText(
+                                    text: TextSpan(
+                                      text: "0",
+
+                                      style: TextStyle(
+                                          color: Colors.black54,
+
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: FontFamily.poppins),
+
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 2,
+                                  ),
+                                  CustomText(
+                                    text: "BURNED",
+                                    size: 14,
+
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),*/
+
+                          Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             width: double.infinity,
                             child: Stack(
@@ -156,6 +330,7 @@ class _NutritionPageState extends State<NutritionPage> {
                                   child: Align(
                                     alignment: Alignment.topRight,
                                     child: TextButton(
+
                                       onPressed: () async {
                                         String result =
                                             await DialogUtils.setKCalDialog();
@@ -166,10 +341,11 @@ class _NutritionPageState extends State<NutritionPage> {
                                           });
                                         }
                                       },
+
                                       child: CustomText(
                                         text: "Set Kcal Limit",
-                                        size: 14,
-                                        color: FF55B5FE,
+                                        size: 13,
+                                        color: customTextColor,
                                       ),
                                     ),
                                   ),
@@ -188,23 +364,37 @@ class _NutritionPageState extends State<NutritionPage> {
                               Column(
                                 children: [
                                   CustomText(
-                                    text: "Protein",
-                                    size: 15,
+                                    text: "PROTEIN",
+                                    size: 14,
                                     color: Colors.green,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   SizedBox(
-                                    height: 5,
+                                    height: 3,
                                   ),
-                                  Container(
+                                  Padding(
+                                    padding: EdgeInsets.all(0.0),
+                                    child: new LinearPercentIndicator(
+                                      // width: MediaQuery.of(context).size.width - 50,
+                                      width:  70,
+                                      animation: true,
+                                      lineHeight: 3.0,
+                                      animationDuration: 1500,
+                                      percent: _.totalProteins,
+                                      center: Text(""),
+                                      linearStrokeCap: LinearStrokeCap.roundAll,
+                                      progressColor: Colors.green,
+                                    ),
+                                  ),
+                                 /* Container(
                                     height: 18,
                                     width: 18,
                                     decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Colors.green.withOpacity(0.8)),
-                                  ),
-                                  SizedBox(
-                                    height: 6,
+                                  ),*/
+                                SizedBox(
+                                    height: 3,
                                   ),
                                   RichText(
                                     text: TextSpan(
@@ -231,23 +421,37 @@ class _NutritionPageState extends State<NutritionPage> {
                               Column(
                                 children: [
                                   CustomText(
-                                    text: "Carbs",
-                                    size: 15,
+                                    text: "CARBS",
+                                    size: 14,
                                     color: Colors.orangeAccent,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   SizedBox(
-                                    height: 5,
+                                    height: 3,
                                   ),
-                                  Container(
+                                  Padding(
+                                    padding: EdgeInsets.all(0.0),
+                                    child: new LinearPercentIndicator(
+                                      // width: MediaQuery.of(context).size.width - 50,
+                                      width:  60,
+                                      animation: true,
+                                      lineHeight: 3.0,
+                                      animationDuration: 1500,
+                                      percent: _.totalCarbs,
+                                      center: Text(""),
+                                      linearStrokeCap: LinearStrokeCap.roundAll,
+                                      progressColor: Colors.orangeAccent,
+                                    ),
+                                  ),
+                               /*   Container(
                                     height: 18,
                                     width: 18,
                                     decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Colors.orangeAccent.withOpacity(0.8)),
-                                  ),
-                                  SizedBox(
-                                    height: 6,
+                                  ),*/
+                                 SizedBox(
+                                    height: 3,
                                   ),
                                   RichText(
                                     text: TextSpan(
@@ -274,23 +478,37 @@ class _NutritionPageState extends State<NutritionPage> {
                               Column(
                                 children: [
                                   CustomText(
-                                    text: "Fat",
-                                    size: 16,
+                                    text: "FAT",
+                                    size: 14,
                                     color: Colors.red,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   SizedBox(
-                                    height: 5,
+                                    height: 3,
                                   ),
-                                  Container(
+                                  Padding(
+                                    padding: EdgeInsets.all(0.0),
+                                    child: new LinearPercentIndicator(
+                                     // width: MediaQuery.of(context).size.width - 50,
+                                      width:  50,
+                                      animation: true,
+                                      lineHeight: 3.0,
+                                      animationDuration: 1500,
+                                      percent: _.totalFats,
+                                      center: Text(""),
+                                      linearStrokeCap: LinearStrokeCap.roundAll,
+                                      progressColor: Colors.red,
+                                    ),
+                                  ),
+                               /*   Container(
                                     height: 18,
                                     width: 18,
                                     decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Colors.red.withOpacity(0.8)),
-                                  ),
+                                  ),*/
                                   SizedBox(
-                                    height: 6,
+                                    height: 3,
                                   ),
                                   RichText(
                                     text: TextSpan(
@@ -320,122 +538,119 @@ class _NutritionPageState extends State<NutritionPage> {
                           SizedBox(
                             height: 18,
                           ),
-                         /*  TextButton(
 
-                            onPressed: () {
-                              if(viewVisible)
-                                hideWidget();
-                              else
-                                showWidget();
-                            },
-
-                            child: Text(
-
-                                finalDate, //title
-                                textAlign: TextAlign.center,
-
-                                style: TextStyle(color:FF050707)
-                            ),
-
-                          ),*/
-
-                         /* Divider(
-                            color: FFB0B8BB,
-                          ),*/
 
                           Container(
-                            color:FFE0EAEE,
+                            color:bodybgColor,
                             height: 300,
                             child: _.asNutritions.length > 0
+
                                 ? ListView.builder(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical:  8),
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: _.asNutritions.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      AsNutrition categoryType =
-                                          _.asNutritions[index];
-                                    return InkWell(
-                                        onTap: () {
-                                          _.selectUnselectCategoryType(index);
-                                          if (_.kCal > 0) {
-                                            Get.toNamed(Routes.selectFoodPage);
-                                          } else {
-                                            Utils.showErrorSnackBar(
-                                                "Please set Kcal limit first.");
-                                          }
-                                        },
-                                        child: Container(
-                                          margin: EdgeInsets.only(left: 8, right: 8, bottom: 8),
-                                          child: Card(
-                                            elevation: 1,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(4.0),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 4,top:4),
-                                              child: Row(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical:  8),
+                                scrollDirection: Axis.vertical,
+                                itemCount: _.asNutritions.length,
+                                itemBuilder:
+                                    (BuildContext context, int index) {
+                                  AsNutrition categoryType =
+                                  _.asNutritions[index];
+                                  return InkWell(
+                                    onTap: () {
+                                      _.selectUnselectCategoryType(index);
+                                      if (_.kCal > 0) {
+                                        Get.toNamed(Routes.selectFoodPage);
+                                      } else {
+                                        Utils.showErrorSnackBar(
+                                            "Please set Kcal limit first.");
+                                      }
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                                      child: Card(
+                                        elevation: 1,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(4.0),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(left: 8, right: 8, bottom: 4,top:4),
+                                          child: Row(
 
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: [
-                                                  if(categoryType.title.endsWith("Breakfast"))
-                                                    InkWell(
-                                                      child: Image.asset(
-                                                        Assets.breakfastIcon,
-                                                        height: 50,
-                                                        width: 50,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              if(categoryType.title.endsWith("Breakfast"))
+                                                InkWell(
+                                                  child: Image.asset(
+                                                    Assets.breakfastIcon,
+                                                    height: 50,
+                                                    width: 50,
+                                                  ),
+
+                                                ),
+                                              if(categoryType.title.endsWith("Lunch"))
+                                                InkWell(
+                                                  child: Image.asset(
+                                                    Assets.lunchIcon,
+                                                    height: 50,
+                                                    width: 50,
+                                                  ),
+
+                                                ),
+                                              if(categoryType.title.endsWith("Snack 1") || categoryType.title.endsWith("Snack 2")  || categoryType.title.endsWith("Snack 3") )
+                                                InkWell(
+                                                  child: Image.asset(
+                                                    Assets.snacksIcon,
+                                                    height: 50,
+                                                    width: 50,
+                                                  ),
+
+                                                ),
+                                              if(categoryType.title.endsWith("Dinner"))
+                                                InkWell(
+                                                  child: Image.asset(
+                                                    Assets.dinnerIcon,
+                                                    height: 50,
+                                                    width: 50,
+                                                  ),
+
+                                                ),
+
+                                              Container(height: 50,child: VerticalDivider(color: FF6D7274)),
+                                              Expanded(
+
+                                                child: Container(
+                                                  margin: EdgeInsets.only(left: 10),
+
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      CustomText(
+                                                        text: "${categoryType.title}",
+                                                        size: 16,
+                                                        color: FF050707,
+                                                        maxLines: 2,
+                                                        fontWeight: FontWeight.w600,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
                                                       ),
 
-                                                    ),
-                                                   if(categoryType.title.endsWith("Lunch"))
-                                                    InkWell(
-                                                      child: Image.asset(
-                                                        Assets.lunchIcon,
-                                                        height: 50,
-                                                        width: 50,
-                                                      ),
+                                                      /*  if( _.nutritions.length > 0 /*&& _.nutritions[0].nutritionData.foodType==1*/ )
 
-                                                    ),
-                                                  if(categoryType.title.endsWith("Snack 1") || categoryType.title.endsWith("Snack 2")  || categoryType.title.endsWith("Snack 3") )
-                                                    InkWell(
-                                                      child: Image.asset(
-                                                        Assets.snacksIcon,
-                                                        height: 50,
-                                                        width: 50,
-                                                      ),
 
-                                                    ),
-                                                  if(categoryType.title.endsWith("Dinner"))
-                                                    InkWell(
-                                                      child: Image.asset(
-                                                        Assets.lunchIcon,
-                                                        height: 50,
-                                                        width: 50,
-                                                      ),
+                                                             NutritionFoodRow(
+                                                            isSelf: false,
+                                                            asNutritions: _.nutritions[0].nutritionData,
+                                                            userScheduleActivityId: _
+                                                                .nutritions[index]
+                                                                .userScheduleActivityId,
+                                                            userScheduleId:
+                                                            _.nutritions[index].userScheduleId,
+                                                            isDone: true,
+                                                            index: index,
+                                                            ),
 
-                                                    ),
-                                                  Container(height: 50,child: VerticalDivider(color: FF6D7274)),
-                                                  Expanded(
-
-                                                    child: Container(
-                                                      margin: EdgeInsets.only(left: 10),
-
-                                                      child: Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                        children: [
-                                                          CustomText(
-                                                            text: "${categoryType.title}",
-                                                            size: 16,
-                                                            color: FF050707,
-                                                            maxLines: 2,
-                                                            fontWeight: FontWeight.w600,
-                                                          ),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                         /* Row(
+                                                      Row(
                                                             children: [
                                                               CustomText(
                                                                 text:"Recommended | ",
@@ -449,34 +664,35 @@ class _NutritionPageState extends State<NutritionPage> {
                                                               ),
                                                             ],
                                                           )*/
-                                                        ],
-                                                      ),
-                                                    ),
+                                                    ],
                                                   ),
-                                                  InkWell(
-                                                      onTap: () async {
-                                                        _.selectUnselectCategoryType(index);
-                                                        if (_.kCal > 0) {
-                                                          Get.toNamed(Routes.selectFoodPage);
-                                                        } else {
-                                                          Utils.showErrorSnackBar(
-                                                              "Please set Kcal limit first.");
-                                                        }
-
-
-                                                      },
-                                                      child:
-                                                      Icon(
-                                                        Icons.add_circle_outline,
-                                                        color: FF6BD295,
-                                                      )
-
-                                                  ),
-                                                ],
+                                                ),
                                               ),
-                                            ),
+                                              InkWell(
+                                                  onTap: () async {
+                                                    _.selectUnselectCategoryType(index);
+                                                    if (_.kCal > 0) {
+                                                      //Get.toNamed(Routes.selectFoodPage);
+                                                      Get.toNamed(Routes.addFoodNutritionPage);
+                                                    } else {
+                                                      Utils.showErrorSnackBar(
+                                                          "Please set Kcal limit first.");
+                                                    }
+
+
+                                                  },
+                                                  child:
+                                                  Icon(
+                                                    Icons.add_circle_outline,
+                                                    color: FF6BD295,
+                                                  )
+
+                                              ),
+                                            ],
                                           ),
-                                       /*   margin: EdgeInsets.only(right: 8),
+                                        ),
+                                      ),
+                                      /*   margin: EdgeInsets.only(right: 8),
                                           child: Chip(
                                             label:
                                                 Text("${categoryType.title}"),
@@ -500,10 +716,10 @@ class _NutritionPageState extends State<NutritionPage> {
                                                 ? FF025074
                                                 : Colors.white,
                                           ),*/
-                                        ),
-                                      );
+                                    ),
+                                  );
 
-                                    /*  return
+                                  /*  return
                                          Container(
                                           margin: EdgeInsets.only(left: 16, right: 16, bottom: 8),
                                           child: Card(
@@ -567,7 +783,7 @@ class _NutritionPageState extends State<NutritionPage> {
                                           ),
                                         );*/
 
-                                    })
+                                })
                                 : Container(),
                           ),
 
@@ -614,7 +830,7 @@ class _NutritionPageState extends State<NutritionPage> {
                                 )
                               : Container(),
                           const SizedBox(height: 16),
-                          _.nutritions.length > 0
+                         _.nutritions.length > 0
                               ? ListView.builder(
                                   shrinkWrap: true,
                                   primary: false,
@@ -641,7 +857,7 @@ class _NutritionPageState extends State<NutritionPage> {
                                     );
                                   })
 
-                              : Container(
+                               :Container(
                                   height: Get.height * 0.1,
                                   child: Center(
                                     child: Padding(
@@ -666,4 +882,5 @@ class _NutritionPageState extends State<NutritionPage> {
           );
         });
   }
+
 }

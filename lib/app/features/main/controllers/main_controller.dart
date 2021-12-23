@@ -31,8 +31,8 @@ class MainController extends GetxController {
 
   final List<Widget> pageList = [
     HomePage(),
-    //SearchPage(),
-    Container(),
+    SearchPage(),
+   // Container(),
     Container(),
     RecipePage(),
     MenuPage(),

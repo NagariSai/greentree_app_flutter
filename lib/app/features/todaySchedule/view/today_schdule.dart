@@ -34,17 +34,17 @@ class _TodaySchedulePageState extends State<TodaySchedulePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodybgColor,
       appBar: CustomAppBar(
         title: "Today Schedule",
         onPositiveTap: () {
           Get.toNamed(Routes.myPlanCoachPage);
         },
         positiveText: "My Plan & Coach",
-
-        positiveTextColor: FF55B5FE,
+        positiveTextColor:bottombgColor,
       ),
       body: Container(
-        color: FFE0EAEE,
+        color: bodybgColor,
         child: Column(
           children: [
           /*  Divider(
@@ -52,14 +52,14 @@ class _TodaySchedulePageState extends State<TodaySchedulePage>
             ),*/
             Container(
               decoration: new BoxDecoration(
-                color: FFE0EAEE,
+                color: bodybgColor,
               ),
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
               child: CommonContainer(
                 height: 44,
                 width: Get.width,
                 borderRadius: 0,
-                backgroundColor: FFE0EAEE,
+                backgroundColor: bodybgColor,
                 child: TabBar(
                   labelStyle: TextStyle(
                       color: Colors.white,
@@ -78,7 +78,7 @@ class _TodaySchedulePageState extends State<TodaySchedulePage>
                   indicatorSize: TabBarIndicatorSize.label,
                   indicator: CustomTabIndicator(
                     indicatorHeight: 31.0,
-                    indicatorColor: Colors.green,
+                    indicatorColor: appbgColor,
                     indicatorRadius: 40,
                   ),
                   tabs: tabs,
@@ -91,6 +91,7 @@ class _TodaySchedulePageState extends State<TodaySchedulePage>
             ),*/
             Expanded(
                 child: TabBarView(
+
 
               controller: _tabController,
               children: [
