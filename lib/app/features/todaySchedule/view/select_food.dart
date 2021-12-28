@@ -152,10 +152,15 @@ class SelectFood extends StatelessWidget {
                                           NutritionData nutrition =
                                               _.nutritionFoodList[index];
 
+                                          print("Selected Food:"+Utils.selectedCat.toString());
+                                          print("Selected Food:"+nutrition.masterCategoryTypeId.toString());
+                                         // if(Utils.selectedCat==nutrition.masterCategoryTypeTitle)
                                           return SelectFoodRow(
                                             nutrition: nutrition,
                                             index: index,
                                           );
+                                          // else
+                                          //   return null;
                                         }),
                                   ),
                                 )

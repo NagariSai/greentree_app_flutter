@@ -42,20 +42,47 @@ class NutritionController extends GetxController {
   List<Nutrition> nutritions = [];
 
   int currentIndex = 0;
-
+  List<NutritionData> nutritionFoodList = [];
   @override
   void onInit() {
     super.onInit();
     selectedDate = requestDobFormat.format(DateTime.now());
     getNutritionData();
+  //  getDefaultNutritionFoodList();
   }
+
 
   setCalenderDate(DateTime dateTime) {
     selectedDate = requestDobFormat.format(dateTime);
     getNutritionData();
     update();
   }
+  void getDefaultNutritionFoodList() async {
+    try {
+      isLoading = true;
+      var response = await repository.getNutritionData(
+          pageNo: 1,
+          pageRecord: 1,
+          foodType: 1,
+          masterCategoryTypeId: 0,
+          search: "");
+      isLoading = false;
+      if (response.status) {
+        if (response.data != null &&
+            response.data.rows != null &&
+            response.data.rows.isNotEmpty) {
 
+          nutritionFoodList.addAll(response.data.rows);
+        }
+      }
+
+    } catch (e) {
+      isLoading = false;
+
+
+      print("error search ${e.toString()}");
+    }
+  }
   void getNutritionData() async {
     try {
       kCal = 0;
@@ -115,6 +142,9 @@ class NutritionController extends GetxController {
     selectedCategoryType = asNutritions[index];
     categoryType = selectedCategoryType.masterCategoryTypeId;
     nutritions = selectedCategoryType.nutritions;
+    Utils.selectedCat=selectedCategoryType.masterCategoryTypeId;
+    print("selected::"+Utils.selectedCat.toString());
+   // print(categoryType);
     update();
   }
 

@@ -30,6 +30,8 @@ class SearchFeedWidget extends StatelessWidget {
       return InkWell(
           onTap: () {
 
+            print("feedtype::"+feedData.type.toString());
+
             if (feedData.type == 1) {
               Get.toNamed(Routes.discussion_detail_page, arguments: [
                 feedData.uniqueId,

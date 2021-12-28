@@ -20,6 +20,7 @@ class Utils {
       Navigator.of(context).pop();
     }
   }
+  static int selectedCat;
   static bool isAppbarVisible=true;
   static String convertEpochToMonth(int dateTime) {
     print("epoch $dateTime");

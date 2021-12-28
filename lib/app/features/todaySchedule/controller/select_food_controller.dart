@@ -44,6 +44,8 @@ class SelectFoodController extends GetxController {
     masterCategoryId = Get.find<NutritionController>().categoryType;
     kCal = Get.find<NutritionController>().kCal;
     getNutritionFoodList();
+    print("onInit"+"getNutritionFoodList");
+
   }
 
   List foodDataMap = [
@@ -96,7 +98,7 @@ class SelectFoodController extends GetxController {
           pageNo: pageNo,
           pageRecord: pageRecord,
           foodType: selectedFoodType['id'],
-          masterCategoryTypeId: 0,
+          masterCategoryTypeId: Utils.selectedCat,
           search: search);
       isLoading = false;
       if (response.status) {
@@ -119,6 +121,8 @@ class SelectFoodController extends GetxController {
       print("error search ${e.toString()}");
     }
   }
+
+
 
   void loadNextFeed() {
     print("loadNextFeed");

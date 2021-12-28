@@ -5,6 +5,7 @@ import 'package:fit_beat/app/data/model/schedule_activity_list_model.dart';
 import 'package:fit_beat/app/data/provider/api.dart';
 import 'package:fit_beat/app/data/repository/api_repository.dart';
 import 'package:fit_beat/app/features/todaySchedule/controller/nutrition_controller.dart';
+import 'package:fit_beat/app/features/todaySchedule/controller/select_food_controller.dart';
 import 'package:fit_beat/app/features/todaySchedule/view/calender_view.dart';
 import 'package:fit_beat/app/routes/app_pages.dart';
 import 'package:fit_beat/app/theme/app_colors.dart';
@@ -27,7 +28,12 @@ class NutritionPage extends StatefulWidget {
 
 class _NutritionPageState extends State<NutritionPage> {
 
+  @override
+  void initState() {
+    super.initState();
 
+
+  }
 
   /*void _updateMyItems(int oldIndex, int newIndex) {
     if (newIndex > oldIndex) {
@@ -547,7 +553,7 @@ class _NutritionPageState extends State<NutritionPage> {
 
                                 ? ListView.builder(
                                 padding: const EdgeInsets.symmetric(
-                                    vertical:  8),
+                                    vertical:  4),
                                 scrollDirection: Axis.vertical,
                                 itemCount: _.asNutritions.length,
                                 itemBuilder:
@@ -671,6 +677,8 @@ class _NutritionPageState extends State<NutritionPage> {
                                               InkWell(
                                                   onTap: () async {
                                                     _.selectUnselectCategoryType(index);
+
+
                                                     if (_.kCal > 0) {
                                                       //Get.toNamed(Routes.selectFoodPage);
                                                       Get.toNamed(Routes.addFoodNutritionPage);

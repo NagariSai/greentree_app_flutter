@@ -59,6 +59,7 @@ class _SelectFoodRowState extends State<SelectFoodRow> {
   bool isAddClick = false;
   bool isFromTodaySchdule = false;
   String _chosenValue='';
+
   List<Serving> jsonResponse;
   var itemList = ['Select Standard',];
   @override
@@ -74,7 +75,8 @@ class _SelectFoodRowState extends State<SelectFoodRow> {
       return InkWell(
         onTap: () {
           print("nutritionId:"+widget.nutrition.quantityType.toString());
-         _fetchServings1("4881229");
+
+        _fetchServings1("4881229");
         //  /app/v1/getRecipesDetails/:unique_id
           //sleep(Duration(seconds:15));
         //  openFoodDetailPageDialog(_);
@@ -89,8 +91,13 @@ class _SelectFoodRowState extends State<SelectFoodRow> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
+                //if(categoryType==widget.nutrition.master_category_type_title)
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+
+                //  if(Utils.selectedCat==widget.nutrition.masterCategoryTypeTitle)
+
+
                   /*ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Container(
