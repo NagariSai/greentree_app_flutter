@@ -74,8 +74,8 @@ class _SelectFoodRowState extends State<SelectFoodRow> {
     return GetBuilder<SelectFoodController>(builder: (_) {
       return InkWell(
         onTap: () {
-          print("nutritionId:"+widget.nutrition.quantityType.toString());
 
+          print("_fetchServings1");
         _fetchServings1("4881229");
         //  /app/v1/getRecipesDetails/:unique_id
           //sleep(Duration(seconds:15));
@@ -566,6 +566,9 @@ class _SelectFoodRowState extends State<SelectFoodRow> {
 
 
   Future<List<Serving>> _fetchServings1(String foodid) async {
+
+    print("_fetchServings1::"+foodid);
+
     final response = await http.post(
       Uri.parse('http://fitness-api.nsdcare.com/getServings'),
       headers: <String, String>{
