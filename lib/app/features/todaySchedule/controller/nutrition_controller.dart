@@ -25,6 +25,7 @@ class NutritionController extends GetxController {
   var totalProteins = 0.0;
   var totalCarbs = 0.0;
   var totalFats = 0.0;
+  var scheduleDate;
 
   AsNutrition selectedCategoryType;
 
@@ -47,7 +48,7 @@ class NutritionController extends GetxController {
   void onInit() {
     super.onInit();
     selectedDate = requestDobFormat.format(DateTime.now());
-    getNutritionData();
+   getNutritionData();
   //  getDefaultNutritionFoodList();
   }
 
@@ -104,6 +105,7 @@ class NutritionController extends GetxController {
         totalCarbs = response.data[0].carbs ?? 0;
         totalFats = response.data[0].fat ?? 0;
         selectUnselectCategoryType(currentIndex);
+        scheduleDate= new DateFormat("dd MMMM , yyyy").format(response.data[0].scheduleDate);
       }
       print("userScheduleId 1: ${userScheduleId}");
       update();
@@ -138,6 +140,8 @@ class NutritionController extends GetxController {
   }
 
   selectUnselectCategoryType(int index) {
+
+    print("selectUnselectCategoryType::"+index.toString());
     currentIndex = index;
     selectedCategoryType = asNutritions[index];
     categoryType = selectedCategoryType.masterCategoryTypeId;

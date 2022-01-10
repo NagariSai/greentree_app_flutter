@@ -59,11 +59,7 @@ class MyApp extends StatelessWidget {
     print("login ${PrefData().isUserLoginIn()}");
     return GetMaterialApp(
       title: Strings.appName,
-      initialRoute: PrefData().isUserLoginIn()
-          ? PrefData().isCoach()
-              ? Routes.coachMain
-              : Routes.main
-          : Routes.intro,
+      initialRoute: PrefData().isUserLoginIn()? PrefData().isCoach()? Routes.coachMain: Routes.main: Routes.intro,
       getPages: AppPages.routes,
       theme: appThemeData,
       defaultTransition: Transition.fade,

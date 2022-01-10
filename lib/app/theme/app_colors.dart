@@ -18,7 +18,8 @@ const Color appbgColor = Color(0xFF318448);
 const Color bottombgColor = Color(0xFFF4FCF3);
 const Color bodybgColor = Color(0xFFEFFCF2);
 const Color customTextColor = Color(0xFF116EAA);
-
+const Color kcalbgColor = Color(0xFF49B9F8);
+const Color transparent = Color(0x00000000);
 
 //const Color primaryColor = Color(0xFFF4FCF3);
 const Color primaryColor = Color(0xFF025074);

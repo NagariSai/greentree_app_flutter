@@ -21,6 +21,7 @@ class Utils {
     }
   }
   static int selectedCat;
+  static bool  fabopen=false;
   static bool isAppbarVisible=true;
   static String convertEpochToMonth(int dateTime) {
     print("epoch $dateTime");

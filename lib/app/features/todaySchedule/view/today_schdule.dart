@@ -103,6 +103,18 @@ class _TodaySchedulePageState extends State<TodaySchedulePage>
           ],
         ),
       ),
+      /*floatingActionButton: Container(
+        padding: EdgeInsets.only(bottom: 1.0),
+        child: Align(
+          alignment: Alignment.bottomRight,
+          child: FloatingActionButton.extended(
+
+            icon: Icon(Icons.add_circle),
+            label: Text(""),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,*/
     );
   }
 }

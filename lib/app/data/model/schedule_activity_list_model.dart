@@ -206,6 +206,7 @@ class Nutrition {
   NutritionData nutritionData;
   NutritionCalory nutritionCalory;
 
+
   factory Nutrition.fromJson(Map<String, dynamic> json) => Nutrition(
         userScheduleActivityId: json["user_schedule_activity_id"] == null
             ? null

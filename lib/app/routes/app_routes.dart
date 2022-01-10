@@ -85,4 +85,7 @@ abstract class Routes {
   static const progressTrackPage = '/progress-track-page';
   static const coachTrainedPepople = '/coach-trained-people-page';
   static const coachRegisterSuccess = '/coach-register-success-page';
+
+
+  static const selectFoodSchedulePage = '/select-food-schedule-page';
 }

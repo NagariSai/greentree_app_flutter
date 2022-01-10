@@ -1,5 +1,6 @@
 import 'package:fit_beat/app/common_widgets/common_webview.dart';
 import 'package:fit_beat/app/common_widgets/image_view.dart';
+import 'package:fit_beat/app/data/model/schedule_activity_list_model.dart';
 import 'package:fit_beat/app/features/account_settings/view/account_settings.dart';
 import 'package:fit_beat/app/features/add_post/views/add_post_page.dart';
 import 'package:fit_beat/app/features/add_post/views/add_recipe_page.dart';
@@ -74,9 +75,11 @@ import 'package:fit_beat/app/features/recipe/views/recipe_detail_page.dart';
 import 'package:fit_beat/app/features/refer_earn/refer_earn.dart';
 import 'package:fit_beat/app/features/report_user/view/report_user_page.dart';
 import 'package:fit_beat/app/features/search/view/search_page.dart';
+import 'package:fit_beat/app/features/todaySchedule/bindings/nutrition_schedule_bindings.dart';
 import 'package:fit_beat/app/features/todaySchedule/view/add_exercise.dart';
 import 'package:fit_beat/app/features/todaySchedule/view/add_food_nutrition_page.dart';
 import 'package:fit_beat/app/features/todaySchedule/view/calorie_calendar_page.dart';
+import 'package:fit_beat/app/features/todaySchedule/view/nutrition_food_schedule.dart';
 import 'package:fit_beat/app/features/todaySchedule/view/select_exercise.dart';
 import 'package:fit_beat/app/features/todaySchedule/view/select_food.dart';
 import 'package:fit_beat/app/features/todaySchedule/view/today_schdule.dart';
@@ -322,9 +325,17 @@ class AppPages {
       name: Routes.selectFoodPage,
       page: () => SelectFood(),
     ),
+
+    GetPage(
+      name: Routes.selectFoodSchedulePage,
+      page: () => NutritionFoodSchedulePage(),
+      binding: NutritionScheduleBinding(),
+    ),
+
     GetPage(
       name: Routes.calorieCalendarPage,
       page: () => CalorieCalendarPage(),
+
     ),
     GetPage(
       name: Routes.calBMRPage,
