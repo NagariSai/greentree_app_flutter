@@ -39,6 +39,10 @@ abstract class Routes {
   static const chatRoomsPage = '/chat-rooms-page';
   static const chatPage = '/chat-page';
   static const searchPage = '/search-page';
+
+  static const searchDetailsPage = '/search-details-page';
+
+
   static const bookmarkPage = '/bookmark-page';
   static const blockUserListPage = '/block-user-list-page';
   static const otherFeedPage = '/other-feed-page';
@@ -88,4 +92,7 @@ abstract class Routes {
 
 
   static const selectFoodSchedulePage = '/select-food-schedule-page';
+
+  static const ssharePage = '/social-share-page';
+  static const instaDetailPage = '/insta-details-page';
 }

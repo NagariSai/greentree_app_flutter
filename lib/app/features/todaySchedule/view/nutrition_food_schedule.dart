@@ -13,13 +13,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 class NutritionFoodSchedulePage extends StatefulWidget {
-  /*List  <Nutrition>
-  myObject;
-  NutritionFoodSchedulePage({
-    this.myObject
-  });*/
+
 
   @override
   _NutritionFoodSchedulePageState createState() =>
@@ -37,7 +34,43 @@ class _NutritionFoodSchedulePageState extends State<NutritionFoodSchedulePage> {
 
   String finalDate = Utils.getCurrentDate();
   int itemcal = 0;
+  double prtn = 0;
+  double carb = 0;
+  double fat = 0;
   List<Nutrition>  selectedntlist;
+
+  Map<String, double> data = {};
+  Rx<Map<String, double>> caloriesMap = Rx({
+    "protein": 0,
+    "carb": 0,
+    "fat": 0,
+  });
+  List<Color> colorList = [
+    Colors.lightGreen,
+    Colors.purple,
+    Colors.deepOrangeAccent,
+  ];
+
+  void updateCalories() {
+    data["protein"] = prtn;
+    data["carb"] = carb;
+    data["fat"] = fat;
+    caloriesMap.value = data;
+  }
+
+  int getCalories() {
+    /*
+    1 gram of carbohydrates = 4 kilocalories.
+    1 gram of protein = 4 kilocalories.
+    1 gram of fat = 9 kilocalories.
+    In addition to carbohydrates, protein and fat, alcohol can also provide energy (1 gram alcohol = 7 kilocalories)
+    */
+
+      return ((prtn * 4) + (carb * 4) + (fat * 9)).toInt();
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<NutritionController>(
@@ -190,14 +223,15 @@ class _NutritionFoodSchedulePageState extends State<NutritionFoodSchedulePage> {
                         ),
                       ),
                       for (var i = 0; i < _.asNutritions.length; i++)
-                        if (_.asNutritions[i].masterCategoryTypeId ==
-                            Utils.selectedCat)
-                          Container(
+                        if (_.asNutritions[i].masterCategoryTypeId == Utils.selectedCat)
+
+                          for(int n=0;n<_.asNutritions[i].nutritions.length;n++)
+
+                            Container(
                               color: Colors.white,
                               alignment: Alignment.centerLeft,
                               padding: const EdgeInsets.all(6.0),
-                              child: buildCategoryRow(
-                                  _.asNutritions[i].nutritions)),
+                              child: buildCategoryRow(_.asNutritions[i].nutritions,_.asNutritions[i].nutritions[n].nutritionData)),
                       SizedBox(
                         height: 18,
                       ),
@@ -205,6 +239,8 @@ class _NutritionFoodSchedulePageState extends State<NutritionFoodSchedulePage> {
                         if (_.asNutritions[i].masterCategoryTypeId ==
                             Utils.selectedCat)
                       buildnutritionCaloryItems(_.asNutritions[i].nutritions),
+
+
                      /* Container(
                         padding: EdgeInsets.only(left: 8.0, right: 8.0),
                         child: Row(
@@ -344,7 +380,7 @@ class _NutritionFoodSchedulePageState extends State<NutritionFoodSchedulePage> {
   buildCircularIndicator(List<Nutrition> ntlist) {
     selectedntlist = ntlist;
     for (var i = 0; i < ntlist.length; i++) {
-      itemcal = ntlist[i].nutritionData.kcal;
+      itemcal = itemcal+ntlist[i].nutritionData.kcal;
     }
     return CircularPercentIndicator(
       backgroundColor: Color.fromRGBO(242, 244, 255, 1),
@@ -390,7 +426,7 @@ class _NutritionFoodSchedulePageState extends State<NutritionFoodSchedulePage> {
     return percentage;
   }
 
-  buildCategoryRow(List<Nutrition> nutritions) {
+  buildCategoryRow(List<Nutrition> nutritions,NutritionData nutritionData) {
     return new Card(
         shape: RoundedRectangleBorder(
           side: BorderSide(color: Colors.black12, width: 1),
@@ -409,8 +445,9 @@ class _NutritionFoodSchedulePageState extends State<NutritionFoodSchedulePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                       // for(int n=0;n<nutritions.length;n++)
                         InkWell(
-                            child: getCategoryItems(nutritions), onTap: () {}),
+                            child: getCategoryItems(nutritions,nutritionData), onTap: () {}),
                         SizedBox(
                           height: 10,
                         ),
@@ -496,24 +533,31 @@ class _NutritionFoodSchedulePageState extends State<NutritionFoodSchedulePage> {
         ]));
   }
   Widget buildnutritionCaloryItems(List<Nutrition> ntlist) {
-    double prtn = 0;
-    double carb = 0;
-    double fat = 0;
+
     int qtype = 1;
     print("buildnutritionCaloryItems:"+ntlist.length.toString());
     try {
       for (var i = 0; i < ntlist.length; i++) {
 
-        print("prtn:"+ntlist[i].nutritionData.nutritionCalory.protein.toString());
+
 
         prtn = prtn+ntlist[i].nutritionData.nutritionCalory.protein;
 
         carb = carb+ntlist[i].nutritionData.nutritionCalory.carbs;
         fat = fat+ntlist[i].nutritionData.nutritionCalory.fat;
         qtype = ntlist[i].nutritionData.quantityType;
-
+        print("prtn:"+prtn.toString());
+        print("carb:"+carb.toString());
+        print("fat:"+fat.toString());
 
       }
+
+      prtn= double.parse((prtn).toStringAsFixed(2));
+      carb= double.parse((carb).toStringAsFixed(2));
+
+      fat= double.parse((fat).toStringAsFixed(2));
+
+      updateCalories();
 
     } catch (e) {
       print("error  ${e.toString()}");
@@ -641,27 +685,192 @@ class _NutritionFoodSchedulePageState extends State<NutritionFoodSchedulePage> {
         SizedBox(
           height: 18,
         ),
+        const SizedBox(height: 8),
+        Divider(),
+        const SizedBox(height: 8),
+       /* Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: CustomText(
+            text: "Calories Information",
+            color: appbgColor,
+            size: 16,
+          ),
+        ),
+        Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Container(
+                            width: 50, child: Text("Protein")),
+                      ),
+                      Text(":"),
+                      Container(
+                        width: 80,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0),
+                        child: CustomText(
+                          color: Colors.lightGreen,
+                          text:prtn.toString()+ " " + Utils().getQuatityType(qtype) ?? "",
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Container(
+                            width: 50, child: Text("Carbs")),
+                      ),
+                      Text(":"),
+                      Container(
+                        width: 80,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0),
+                        child: CustomText(
+                          color: Colors.purple,
+                          text:carb.toString()+ " " + Utils().getQuatityType(qtype) ?? "",
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child:
+                        Container(width: 50, child: Text("Fat")),
+                      ),
+                      Text(":"),
+                      Container(
+                        width: 80,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0),
+                        child: CustomText(
+                          color: Colors.orangeAccent,
+                          text: fat.toString()+ " " + Utils().getQuatityType(qtype)?? "",
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                  margin: EdgeInsets.only(top: 16),
+                  alignment: Alignment.centerRight,
+                  height: 120,
+                  child: Stack(
+                    children: [
+                      Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                    "${getCalories() ?? 0}",
+                                    style: TextStyle(
+                                        color: primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16)),
+                              ),
+                              Text("Kcal",
+                                  style: TextStyle(fontSize: 12)),
+                            ],
+                          )),
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            child: CircularProgressIndicator(
+                                strokeWidth: 10,
+                                value: 1,
+                                valueColor:
+                                AlwaysStoppedAnimation<Color>(
+                                    Colors.grey)),
+                            height: 100,
+                            width: 100,
+                          ),
+                          Obx(
+                                () => PieChart(
+                              dataMap: caloriesMap.value,
+                              chartLegendSpacing: 0,
+                              chartRadius: 100,
+                              colorList: colorList,
+                              initialAngleInDegree: 0,
+                              chartType: ChartType.ring,
+                              ringStrokeWidth: 10,
+                              legendOptions: LegendOptions(
+                                showLegendsInRow: false,
+                                showLegends: false,
+                              ),
+                              chartValuesOptions: ChartValuesOptions(
+                                showChartValueBackground: false,
+                                showChartValues: false,
+                                showChartValuesInPercentage: false,
+                                showChartValuesOutside: false,
+                              ),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  )),
+            ),
+          ],
+        ),
+*/
       ]);
 
   }
-  Widget getCategoryItems(List<Nutrition> ntlist) {
+  Widget getCategoryItems(List<Nutrition> ntlist,NutritionData nutritionData) {
     String items = "";
     int qty = 0;
     int qtype = 1;
 
     try {
-      for (var i = 0; i < ntlist.length; i++) {
+      /*for (var i = 0; i < ntlist.length; i++) {
         items = items + ntlist[i].nutritionData.title + ",";
         itemcal = ntlist[i].nutritionData.kcal;
         qty = ntlist[i].nutritionData.quantity;
         qtype = ntlist[i].nutritionData.quantityType;
 
         if (items.length > 20) items = items.substring(0, 20);
-      }
+      }*/
 
+
+      items = nutritionData.title;
+      itemcal = nutritionData.kcal;
+      qty = nutritionData.quantity;
+      qtype =nutritionData.quantityType;
+
+
+     /*
       if (items.endsWith(",")) {
         items = items.substring(0, items.lastIndexOf(","));
-      }
+      }*/
 
       print("itemcal  ${itemcal}");
       // list.add(new Text(items));

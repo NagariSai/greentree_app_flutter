@@ -203,7 +203,7 @@ class _SelectFoodRowState extends State<SelectFoodRow> {
                   topRight: Radius.circular(24),
                   topLeft: Radius.circular(24),
                 ),
-                color: Colors.white),
+                color: bodybgColor),
             height: 500,
             child: SingleChildScrollView(
               child: Column(

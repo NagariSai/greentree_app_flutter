@@ -1,21 +1,23 @@
 import 'package:fit_beat/app/data/model/feed/feed_response.dart';
 import 'package:fit_beat/app/data/repository/api_repository.dart';
-import 'package:fit_beat/app/features/menu/instagram/instagram_profile.dart';
-import 'package:fit_beat/app/features/menu/instagram/instagram_user.dart';
-import 'package:fit_beat/app/utils/pref_user_data.dart';
 import 'package:fit_beat/app/utils/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:meta/meta.dart';
 
-class SearchController extends GetxController {
+
+
+
+
+class SearchDetailsController extends GetxController {
   final ApiRepository repository;
 
-  SearchController({@required this.repository}) : assert(repository != null);
+  SearchDetailsController({@required this.repository}) : assert(repository != null);
 
   RxBool isLoading = RxBool(false);
   RxList<Feed> feedList = RxList();
-  List<String> _listItem = new List();
-  TextEditingController searchController = TextEditingController();
 
   bool showIcon = false;
   var indicator = new GlobalKey<RefreshIndicatorState>();
@@ -24,20 +26,21 @@ class SearchController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    Utils.search_value=PrefData().getUserData().fullName;
     searchData("rayudu");
   }
 
   searchData(String query) async {
     try {
-      Utils.search_value=query;
       isLoading.value = true;
       var response = await repository.searchData(query: query);
-      isLoading.value = false;
+
       if (response.status && response.data != null) {
         feedList.clear();
         feedList.addAll(response.data.feeds);
+        feedList.removeWhere((item) => item.uniqueId==Utils.selectedfeedData.uniqueId);
+        feedList.insert(0,Utils.selectedfeedData);
       }
+      isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
       feedList.clear();
@@ -89,16 +92,5 @@ class SearchController extends GetxController {
     update();
   }
 
-  clearSearch()  {
 
-    feedList.clear();
-    feedList.refresh();
-    searchController.clear();
-    showIcon = false;
-    update();
-  }
-
-  reloadSearch() {
-    searchData(searchController.text);
-  }
 }

@@ -13,13 +13,14 @@ class SearchFeedWidget extends StatelessWidget {
   final Feed feedData;
   final Function onClickLikeUnLike;
   final Function onClickBookmark;
-
+  final int selindex;
 
 
   const SearchFeedWidget({ Key key,
      this.feedData,
+    this.selindex,
      this.onClickLikeUnLike,
-     this.onClickBookmark})
+     this.onClickBookmark, })
       : super(key: key);
 
 
@@ -31,8 +32,9 @@ class SearchFeedWidget extends StatelessWidget {
           onTap: () {
 
             print("feedtype::"+feedData.type.toString());
+            Get.toNamed(Routes.searchDetailsPage);
 
-            if (feedData.type == 1) {
+           /* if (feedData.type == 1) {
               Get.toNamed(Routes.discussion_detail_page, arguments: [
                 feedData.uniqueId,
                 feedData.type,
@@ -56,7 +58,7 @@ class SearchFeedWidget extends StatelessWidget {
             } else if (feedData.type == 5) {
               Get.toNamed(Routes.post_update_detail_page,
                   arguments: [feedData.uniqueId, feedData.type]);
-            }
+            }*/
           },
 
           child: Container(

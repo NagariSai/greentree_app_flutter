@@ -56,12 +56,14 @@ import 'package:fit_beat/app/features/following/view/following.dart';
 import 'package:fit_beat/app/features/home/bindings/home_binding.dart';
 import 'package:fit_beat/app/features/home/views/home_page.dart';
 import 'package:fit_beat/app/features/home/views/other_feed_page.dart';
+import 'package:fit_beat/app/features/home/views/social_share.dart';
 import 'package:fit_beat/app/features/intro/views/intro_page.dart';
 import 'package:fit_beat/app/features/kcal_cal/view/calculator_kcal.dart';
 import 'package:fit_beat/app/features/main/bindings/main_binding.dart';
 import 'package:fit_beat/app/features/main/views/main_page.dart';
 import 'package:fit_beat/app/features/menu/views/community_page.dart';
 import 'package:fit_beat/app/features/menu/views/help_support_page.dart';
+import 'package:fit_beat/app/features/menu/views/insta_details.dart';
 import 'package:fit_beat/app/features/menu/views/water_reminder.dart';
 import 'package:fit_beat/app/features/my_plan_coach/my_plan_coach.dart';
 import 'package:fit_beat/app/features/my_plan_coach/my_plan_coach_details.dart';
@@ -74,6 +76,7 @@ import 'package:fit_beat/app/features/prog_tracker/views/progress_tracker_page.d
 import 'package:fit_beat/app/features/recipe/views/recipe_detail_page.dart';
 import 'package:fit_beat/app/features/refer_earn/refer_earn.dart';
 import 'package:fit_beat/app/features/report_user/view/report_user_page.dart';
+import 'package:fit_beat/app/features/search/view/search_details.dart';
 import 'package:fit_beat/app/features/search/view/search_page.dart';
 import 'package:fit_beat/app/features/todaySchedule/bindings/nutrition_schedule_bindings.dart';
 import 'package:fit_beat/app/features/todaySchedule/view/add_exercise.dart';
@@ -248,6 +251,11 @@ class AppPages {
     GetPage(
       name: Routes.searchPage,
       page: () => SearchPage(),
+    ),
+
+    GetPage(
+      name: Routes.searchDetailsPage,
+      page: () => SearchDetailsPage(),
     ),
     GetPage(
       name: Routes.bookmarkPage,
@@ -438,5 +446,14 @@ class AppPages {
         name: Routes.coachRegisterSuccess,
         page: () => CoachRegisterSuccessPage(),
         binding: CoachRegisterSuccessBinding()),
+
+    GetPage(
+      name: Routes.ssharePage,
+      page: () => SocialShare(),
+    ),
+    GetPage(
+      name: Routes.instaDetailPage,
+      page: () => InstaDetailsScreen(),
+    ),
   ];
 }

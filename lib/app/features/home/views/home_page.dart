@@ -42,7 +42,8 @@ class HomePage extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () {
-                            Get.toNamed(Routes.todaySchedulePage);
+                           Get.toNamed(Routes.todaySchedulePage);
+
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -460,7 +461,7 @@ class HomePage extends StatelessWidget {
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
                                   itemBuilder: (context, index) {
-                                    return FeedWidget(
+                                    return FeedWidget(context,
                                       feedData: _.feedList[index],
                                     );
                                   },

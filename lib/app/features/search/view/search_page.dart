@@ -1,12 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fit_beat/app/common_widgets/custom_text.dart';
 import 'package:fit_beat/app/common_widgets/normal_text_field.dart';
+import 'package:fit_beat/app/data/model/feed/feed_response.dart';
 import 'package:fit_beat/app/data/provider/api.dart';
 import 'package:fit_beat/app/data/repository/api_repository.dart';
+import 'package:fit_beat/app/features/home/views/media_slidable_widget.dart';
 import 'package:fit_beat/app/features/home/views/video_widget.dart';
 import 'package:fit_beat/app/features/search/view/search_feed.dart';
 
 import 'package:fit_beat/app/features/search/controller/search_controller.dart';
+import 'package:fit_beat/app/routes/app_pages.dart';
 import 'package:fit_beat/app/theme/app_colors.dart';
+import 'package:fit_beat/app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -34,20 +39,7 @@ class SearchPage extends StatefulWidget  {
      //showHelloWorld();
     // WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
    }
-   void showHelloWorld() {
-     showDialog(
-       context: context,
-       builder: (context) => new AlertDialog(
-         content: new Text('Hello World'),
-         actions: <Widget>[
-           new FlatButton(
-             child: new Text('DISMISS'),
-             onPressed: () => Navigator.of(context).pop(),
-           )
-         ],
-       ),
-     );
-   }
+
    @override
    void initState() {
        super.initState();
@@ -115,10 +107,8 @@ class SearchPage extends StatefulWidget  {
 
                      _.updateCloseIcon(text);
                      if (text.length > 2) {
-                       print("if search");
                        _.searchData(text);
                      } else {
-                       print("else search");
                        _.feedList.clear();
                        _.feedList.refresh();
                      }
@@ -148,19 +138,13 @@ class SearchPage extends StatefulWidget  {
                child: Column(
                  mainAxisSize: MainAxisSize.min,
                  children: [
-
                    Flexible(
                      fit: FlexFit.loose,
-
-
                       child : _.feedList.length > 0
-
                    ? StaggeredGridView.countBuilder(
-
-
                        staggeredTileBuilder: (int index) =>
-                           _.feedList[index].totalLikes == 0 ? StaggeredTile.count(1,1) : StaggeredTile.count(2,1),
-                     //_.feedList[index].totalLikes > 0 ? StaggeredTile.count(2,1) : StaggeredTile.count(1,1),
+                        //   _.feedList[index].totalLikes == 0 ? StaggeredTile.count(1,1) : StaggeredTile.count(2,1),
+                     _.feedList[index].totalLikes > 0 ? StaggeredTile.count(1,1) : StaggeredTile.count(1,1),
                      crossAxisCount: 3,
                      controller: scrollController,
                      itemCount:  _.feedList.length,
@@ -171,15 +155,13 @@ class SearchPage extends StatefulWidget  {
            itemBuilder: (context, index) {
 
 
-
              if(_.feedList[index].userMedia[0].mediaType==1) {
-               return SearchFeedWidget(
-                 feedData: _.feedList[index],
-               );
+              // return SearchFeedWidget(feedData: _.feedList[index],);
+               return searchFeed(_.feedList[index],index);
              }
              else
              {
-             //  print( "mdeia::"+_.feedList[index].userMedia[0].mediaUrl);
+              print( "mdeia::"+_.feedList[index].userMedia[0].mediaUrl);
 
                /*  return InViewNotifierList(
                  isInViewPortCondition:
@@ -205,8 +187,15 @@ class SearchPage extends StatefulWidget  {
                    );
                  },
                );*/
+              // return MediaSlidableWidget(mediaList: _.feedList[index].userMedia);
 
-
+              return InViewVideoWidget(
+                  currentPage: 0,
+                  totalPage: 1,
+                  viewCount: 0,
+                  play: isInView,
+                  feedData:_.feedList[index]);
+               //   feedData:_.feedList[index].userMedia[0].mediaUrl);
               return VideoWidget( url: _.feedList[index].userMedia[0].mediaUrl,
                  currentPage: 0,
                  totalPage: 1,
@@ -308,6 +297,83 @@ class SearchPage extends StatefulWidget  {
 */
 
      );
+   }
+
+
+
+   Widget searchFeed(Feed feedData ,int index) {
+
+     print("searchFeed:"+feedData.userMedia[0].mediaUrl.toString());
+
+     return InkWell(
+         onTap: () {
+           Utils.selectedfeedData=feedData;
+           print("searchFeed::"+index.toString());
+           Get.toNamed(Routes.searchDetailsPage);
+
+
+         },
+
+         child: Container(
+
+
+             padding: const EdgeInsets.only(
+                 left: 16, right: 16, top: 16, bottom: 4),
+             decoration: BoxDecoration(
+                 border: Border.all(
+                     width: 0, //
+                     color: Colors.white//                 <--- border width here
+                 ),
+                 borderRadius: BorderRadius.circular(2),
+
+
+                 image: DecorationImage(
+
+                     image: NetworkImage(
+
+                         feedData.userMedia[0].mediaUrl
+                         ),
+
+                     fit: BoxFit.cover
+
+                 )
+             ),
+             child: _buildBody(feedData)
+
+         )
+     );
+
+   }
+
+
+   Widget _buildBody(Feed feedData) {
+
+     return new Container(
+         constraints: new BoxConstraints.expand(
+           height: 20.0,
+         ),
+         padding: new EdgeInsets.only(left: 8.0, bottom: 8.0, right: 8.0),
+         /* decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/more.png'),
+              fit: BoxFit.cover,
+            ),
+          ),*/
+
+         child: new Stack(
+           children: <Widget>[
+             if (feedData.userMedia.length > 1)
+
+
+               new Positioned(
+                 right: 0.0,
+                 top: 0.0,
+                 child: Image.asset('assets/images/more.png'),
+               ),
+           ],
+         )
+     );
+
    }
    }
 

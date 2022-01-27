@@ -23,6 +23,8 @@ class Utils {
   static int selectedCat;
   static bool  fabopen=false;
   static bool isAppbarVisible=true;
+  static Feed selectedfeedData;
+  static String search_value;
   static String convertEpochToMonth(int dateTime) {
     print("epoch $dateTime");
     if (dateTime == null) return "";

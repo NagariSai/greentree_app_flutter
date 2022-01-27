@@ -280,6 +280,26 @@ class CustomBottomNavigationBar extends StatelessWidget {
       context: context,
       builder: (BuildContext context) => CupertinoActionSheet(
           actions: <Widget>[
+
+          CupertinoActionSheetAction(
+              child: CustomText(
+                text: "Share on instagram",
+                size: 17,
+                fontWeight: FontWeight.w500,
+                color: titleBlackColor,
+              ),
+              isDefaultAction: true,
+              onPressed: () {
+                Get.back();
+                Get.toNamed(Routes.ssharePage, parameters: {
+                  "postType": "0",
+                  "title": "",
+                  "isOtherType": "",
+                  "masterPostId": "0"
+                });
+                // Navigator.pop(context, 'discussion');
+              },
+            ),
             CupertinoActionSheetAction(
               child: CustomText(
                 text: "Start a discussion",

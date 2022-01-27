@@ -21,6 +21,7 @@ class SelectFood extends StatelessWidget {
             repository: ApiRepository(apiClient: ApiClient())),
         builder: (_) {
           return Scaffold(
+            backgroundColor: bodybgColor,
             appBar: CustomAppBar(
               title: "Select Food",
               positiveText: "Add",
@@ -38,10 +39,14 @@ class SelectFood extends StatelessWidget {
               negativeText: "Cancel",
             ),
             body: _.isLoading
+
                 ? Center(child: CircularProgressIndicator())
+
                 : Column(
+
                     children: [
                       Padding(
+
                         padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
                         child: NormalTextField(
                           controller: _.searchController,

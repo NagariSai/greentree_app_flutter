@@ -46,7 +46,7 @@ class BookmarkPage extends StatelessWidget {
                                   shrinkWrap: true,
                                   itemCount: _.feedList.length,
                                   itemBuilder: (context, index) {
-                                    return FeedWidget(
+                                    return FeedWidget(context,
                                       feedData: _.feedList[index],
                                       onClickLikeUnLike: () {
                                         _.reloadUserBookmarkList();

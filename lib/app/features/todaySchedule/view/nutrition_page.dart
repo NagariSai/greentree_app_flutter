@@ -603,7 +603,7 @@ class _NutritionPageState extends State<NutritionPage> {
             text: "$name",
             size: 16,
             color: FF050707,
-            maxLines: 2,
+            maxLines: 1,
             textAlign: TextAlign.left,
             fontWeight: FontWeight.w600,
           ),
@@ -612,7 +612,7 @@ class _NutritionPageState extends State<NutritionPage> {
           height: 10,
         ),
         Container(
-          padding: const EdgeInsets.only(left: 4, right: 0, bottom: 0, top: 0),
+          padding: const EdgeInsets.only(left: 0, right: 0, bottom: 0, top: 0),
           child: Text(
             items,
             style: TextStyle(color: Colors.black, fontSize: 15),

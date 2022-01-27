@@ -753,7 +753,7 @@ class CoachDetailPage extends StatelessWidget {
                                             physics:
                                                 NeverScrollableScrollPhysics(),
                                             itemBuilder: (context, index) {
-                                              return FeedWidget(
+                                              return FeedWidget(context,
                                                 feedData: _.feedList[index],
                                               );
                                             },

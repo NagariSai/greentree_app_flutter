@@ -61,6 +61,28 @@ class MenuPage extends StatelessWidget {
                           size: 11,
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      width: 80,
+                    ),
+                    Column(
+
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+
+                      InkWell(
+                      onTap: () {
+                        Get.toNamed(Routes.instaDetailPage);
+                      },
+                        child:CustomText(
+                          textAlign: TextAlign.end,
+                          text: "Instagram details",
+                          color: titleBlackColor,
+                          size: 17,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      ],
                     )
                   ],
                 ),

@@ -139,7 +139,7 @@ class RecipePage extends StatelessWidget {
                                     physics: NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       Feed feedData = _.feedList[index];
-                                      return FeedWidget(
+                                      return FeedWidget(context,
                                         feedData: feedData,
                                       );
                                     },

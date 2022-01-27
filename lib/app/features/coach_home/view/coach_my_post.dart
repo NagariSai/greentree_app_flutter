@@ -27,7 +27,7 @@ class CoachMyPost extends StatelessWidget {
                         itemCount: _.feedList.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          return FeedWidget(
+                          return FeedWidget(context,
                             feedData: _.feedList[index],
                           );
                         },
