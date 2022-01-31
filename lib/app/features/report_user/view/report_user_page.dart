@@ -15,6 +15,7 @@ class ReportUserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodybgColor,
       appBar: CustomAppBar(
         title: "Report",
       ),

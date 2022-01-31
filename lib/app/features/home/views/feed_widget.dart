@@ -447,18 +447,18 @@ class FeedWidget extends StatelessWidget {
 
         Utils.dismissLoadingDialog();
      // Share.shareFiles(imageList, text: descriptions);
-        final box = context.findRenderObject() as RenderBox;
-        Share.shareFiles(imageList,text: descriptions,subject: descriptions,sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
-      //  ShareExtend.shareMultiple(imageList, "image",subject: descriptions);
+      //  final box = context.findRenderObject() as RenderBox;
+       // Share.shareFiles(imageList,text: descriptions,subject: descriptions,sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
+        ShareExtend.shareMultiple(imageList, "image",subject: descriptions);
       }
       else{
         Utils.dismissLoadingDialog();
        // Share.shareFiles(imageList, text: descriptions);
 
-        final box = context.findRenderObject() as RenderBox;
-        Share.shareFiles(imageList,text: descriptions,subject: descriptions,sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
+      //  final box = context.findRenderObject() as RenderBox;
+       // Share.shareFiles(imageList,text: descriptions,subject: descriptions,sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
 
-       // ShareExtend.shareMultiple(imageList, "image",subject: descriptions);
+        ShareExtend.shareMultiple(imageList, "image",subject: descriptions);
       }
 
    // }

@@ -20,6 +20,7 @@ class CoachDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodybgColor,
       appBar: CustomAppBar(),
       body: GetBuilder<CoachDetailsController>(
           init: CoachDetailsController(
@@ -34,7 +35,7 @@ class CoachDetailPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                padding: EdgeInsets.symmetric(horizontal: 16,vertical: 12),
                                 child: Stack(
                                   overflow: Overflow.visible,
                                   alignment: Alignment.center,
@@ -698,7 +699,7 @@ class CoachDetailPage extends StatelessWidget {
                                           )
                                         : Container(),
                                     Divider(
-                                      thickness: 4,
+                                      thickness: 1,
                                       color: dividerColor,
                                     ),
                                     Container(
@@ -743,7 +744,7 @@ class CoachDetailPage extends StatelessWidget {
                                       ),
                                     ),
                                     Divider(
-                                      thickness: 4,
+                                      thickness: 1,
                                       color: dividerColor,
                                     ),
                                     _.feedList.length > 0
@@ -759,7 +760,7 @@ class CoachDetailPage extends StatelessWidget {
                                             },
                                             separatorBuilder: (context, index) {
                                               return Divider(
-                                                thickness: 4,
+                                                thickness: 1,
                                                 color: dividerColor,
                                               );
                                             },

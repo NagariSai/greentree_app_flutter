@@ -34,6 +34,7 @@ class _ChatRequestPageState extends State<ChatRequestPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodybgColor,
       appBar: CustomAppBar(
         title: "Chat Requests",
       ),

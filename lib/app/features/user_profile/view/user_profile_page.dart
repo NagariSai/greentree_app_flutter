@@ -15,6 +15,7 @@ class UserProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodybgColor,
       appBar: CustomAppBar(),
       body: GetBuilder<UserProfileController>(
           init: UserProfileController(

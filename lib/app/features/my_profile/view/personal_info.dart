@@ -22,6 +22,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
     return SingleChildScrollView(
       child: GetBuilder<ProfileController>(builder: (_) {
         return Container(
+          color: bodybgColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

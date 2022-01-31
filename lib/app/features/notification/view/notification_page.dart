@@ -23,6 +23,7 @@ class NotificationPage extends StatelessWidget {
             repository: ApiRepository(apiClient: ApiClient())),
         builder: (_) {
           return Scaffold(
+            backgroundColor: bodybgColor,
             appBar: CustomAppBar(
               title: "Notifications",
               onPositiveTap: () {
@@ -259,6 +260,8 @@ class NotificationPage extends StatelessWidget {
     print("discussion");
     try {
       var notificationType = data.notificationType;
+      print("notificationType:"+notificationType.toString());
+      print("globalType:"+data.globalType.toString());
       if (notificationType == 1) {
         if (data.globalType == 1) {
           print("discussion");

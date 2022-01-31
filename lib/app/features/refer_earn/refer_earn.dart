@@ -10,6 +10,7 @@ class ReferEarn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodybgColor,
       appBar: CustomAppBar(
         title: "Refer & Earn",
       ),

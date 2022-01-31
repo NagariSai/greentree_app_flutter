@@ -24,7 +24,8 @@ class ChatRequestRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 8),
-      color: const Color(0xffffffff),
+      //color: const Color(0xffffffff),
+      color: bodybgColor,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

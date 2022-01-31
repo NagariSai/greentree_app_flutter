@@ -16,8 +16,9 @@ class ChatRoomsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodybgColor,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: appbgColor,
           titleSpacing: 0,
           automaticallyImplyLeading: false,
           elevation: 0,
@@ -25,34 +26,48 @@ class ChatRoomsPage extends StatelessWidget {
             icon: Icon(
               Icons.chevron_left,
               size: 28,
+
             ),
             onPressed: () => Get.back(),
-            color: primaryColor,
+            color: Colors.white,
           ),
           title: null,
           actions: [
             IconButton(
+
                 icon: Image.asset(
+
                   Assets.friendsIcon,
+                  color: bottombgColor,
                   width: 24,
                   height: 24,
                 ),
+
                 onPressed: () => Get.toNamed(Routes.chatRequestPage)),
             IconButton(
+
                 icon: Image.asset(
                   Assets.newChatIcon,
+                  color: bottombgColor,
                   width: 24,
                   height: 24,
                 ),
+
                 onPressed: () => Get.toNamed(Routes.inviteUserToChatPage))
           ],
         ),
-        body: Column(
+        body:
+    Container(
+      color: bodybgColor,
+      child:
+        Column(
+
+
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 16),
               child: CustomText(
                 text: "Chats",
                 color: titleBlackColor,
@@ -145,6 +160,7 @@ class ChatRoomsPage extends StatelessWidget {
                         );
                 }),
           ],
-        ));
+        ))
+    );
   }
 }

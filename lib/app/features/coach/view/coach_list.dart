@@ -16,7 +16,7 @@ class CoachList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: FFFFFFFF,
+      backgroundColor: bodybgColor,
       appBar: CustomAppBar(
         title: "Coach",
         /*positiveText: "My Plan & coach",
@@ -29,7 +29,7 @@ class CoachList extends StatelessWidget {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
                       child: NormalTextField(
                         controller: _.searchController,
                         bgColor: settingBgColor,
@@ -100,7 +100,7 @@ class CoachList extends StatelessWidget {
                       ),
                     ),
                     Divider(
-                      thickness: 4,
+                      thickness: 1,
                       color: dividerColor,
                     ),
                     _.coachList.length > 0

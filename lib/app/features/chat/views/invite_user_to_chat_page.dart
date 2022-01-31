@@ -17,6 +17,7 @@ class InviteUserToChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodybgColor,
         appBar: CustomAppBar(
           title: "New Chat",
         ),
@@ -24,11 +25,11 @@ class InviteUserToChatPage extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16,top: 16),
                 child: CustomTextField(
                   controller: textController,
                   hintText: "Search People",
-                  height: 36,
+                  height: 40,
                   prefixIcon: Icon(
                     Icons.search,
                     color: FF025074,

@@ -12,8 +12,10 @@ class CoachMainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CoachMainController>(
       builder: (s) => Scaffold(
+        backgroundColor: bodybgColor,
         appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: appbgColor
+            ,
             elevation: 0,
             title: Text(
               s.titleName,
@@ -26,6 +28,7 @@ class CoachMainPage extends StatelessWidget {
               IconButton(
                   icon: Image.asset(
                     Assets.chat,
+                    color: bottombgColor,
                     width: 24,
                     height: 24,
                   ),
@@ -33,6 +36,7 @@ class CoachMainPage extends StatelessWidget {
               IconButton(
                   icon: Image.asset(
                     Assets.bell,
+                    color: bottombgColor,
                     width: 24,
                     height: 24,
                   ),

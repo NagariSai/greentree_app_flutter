@@ -17,7 +17,8 @@ class ChatRoomWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        color: const Color(0xffffffff),
+        //color: const Color(0xffffffff),
+        color: bodybgColor,
         child: Row(
           children: [
             Container(

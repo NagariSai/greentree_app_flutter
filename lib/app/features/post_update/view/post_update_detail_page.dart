@@ -28,6 +28,7 @@ class PostUpdateDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodybgColor,
       resizeToAvoidBottomInset: true,
       appBar: CustomAppBar(
         title: "",

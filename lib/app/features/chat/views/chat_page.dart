@@ -29,7 +29,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: bodybgColor,
         appBar: CustomAppBar(),
         body: GetBuilder<ChatController>(
             init: ChatController(

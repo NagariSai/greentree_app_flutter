@@ -14,6 +14,7 @@ class BlockUserListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodybgColor,
       appBar: CustomAppBar(
         title: "Blocked Users",
       ),
@@ -27,7 +28,7 @@ class BlockUserListPage extends StatelessWidget {
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(
+                          padding: const EdgeInsets.only(top:8,
                               left: 16, right: 16, bottom: 16),
                           child: CustomTextField(
                             hintText: "Search People",

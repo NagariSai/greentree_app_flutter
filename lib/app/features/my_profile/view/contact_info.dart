@@ -9,6 +9,7 @@ class ContactInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(builder: (_) {
       return Container(
+        color: bodybgColor,
         child: Column(
           children: [
             Row(

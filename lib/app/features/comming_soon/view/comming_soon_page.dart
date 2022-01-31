@@ -10,6 +10,7 @@ class ComingSoonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     String title = Get.arguments ?? "";
     return Scaffold(
+      backgroundColor: bodybgColor,
       appBar: CustomAppBar(
         title: title,
       ),

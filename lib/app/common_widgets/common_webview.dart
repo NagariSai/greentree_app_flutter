@@ -17,19 +17,23 @@ class _CommonWebViewState extends State<CommonWebView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: bodybgColor,
       appBar: CustomAppBar(
         title: title,
       ),
       body: Stack(
+
         children: <Widget>[
           Column(
             children: <Widget>[
               Expanded(
+
                 child: WebView(
+
                   initialUrl: ApiEndpoint.privacyApi,
                   javascriptMode: JavascriptMode.unrestricted,
                   onWebViewCreated: (webViewController) {
+
                     print("created called");
                   },
                   onPageFinished: (finish) {
@@ -48,7 +52,9 @@ class _CommonWebViewState extends State<CommonWebView> {
                     backgroundColor: primaryColor,
                   ),
                 )
-              : Container(),
+              : Container(
+
+          ),
         ],
       ),
     );

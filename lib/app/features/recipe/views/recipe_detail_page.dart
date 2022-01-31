@@ -49,7 +49,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: FFFFFFFF,
+      backgroundColor: bodybgColor,
       appBar: CustomAppBar(
         title: "",
       ),
@@ -140,7 +140,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage>
                                     _createTopView(),
                                     Container(
                                       padding:
-                                          EdgeInsets.symmetric(horizontal: 16),
+                                          EdgeInsets.symmetric(horizontal: 16,vertical: 8),
                                       child: CommonContainer(
                                         height: 36,
                                         width: Get.width,
@@ -180,7 +180,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage>
                                           ],
                                         )),
                                     Divider(
-                                      thickness: 4,
+                                      thickness: 1,
                                       color: dividerColor,
                                     ),
                                     _.isCommentLoading
@@ -506,7 +506,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage>
   Widget _createTopView() {
     return GetBuilder<RecipeDetailsController>(builder: (_) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
         child: Column(
           children: [
             Row(

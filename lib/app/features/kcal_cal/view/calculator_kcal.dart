@@ -21,6 +21,7 @@ class CalculatorKKalPage extends StatelessWidget {
             repository: ApiRepository(apiClient: ApiClient())),
         builder: (_) {
           return Scaffold(
+            backgroundColor: bodybgColor,
             appBar: CustomAppBar(
               title: "Kcal Calc.",
             ),

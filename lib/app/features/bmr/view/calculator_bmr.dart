@@ -21,6 +21,7 @@ class CalculatorBMRPage extends StatelessWidget {
             repository: ApiRepository(apiClient: ApiClient())),
         builder: (_) {
           return Scaffold(
+            backgroundColor: bodybgColor,
             appBar: CustomAppBar(
               title: "BMR Calc.",
             ),

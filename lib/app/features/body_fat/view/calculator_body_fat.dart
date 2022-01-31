@@ -19,6 +19,7 @@ class CalculatorBodyFatPage extends StatelessWidget {
             repository: ApiRepository(apiClient: ApiClient())),
         builder: (_) {
           return Scaffold(
+            backgroundColor: bodybgColor,
             appBar: CustomAppBar(
               title: "Body Fat",
             ),

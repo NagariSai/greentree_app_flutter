@@ -63,6 +63,7 @@ class _CoachProfilePageState extends State<CoachProfilePage>
             repository: ApiRepository(apiClient: ApiClient())),
         builder: (_) {
           return Scaffold(
+            backgroundColor: bodybgColor,
             appBar: CustomAppBar(
               negativeText: _.isEdit.value ? "Cancel" : null,
               positiveText: _.isEdit.value ? "Save" : null,

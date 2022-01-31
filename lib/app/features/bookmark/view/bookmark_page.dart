@@ -12,6 +12,7 @@ class BookmarkPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodybgColor,
       appBar: CustomAppBar(),
       body: GetX<BookMarkController>(
           init: BookMarkController(
@@ -58,7 +59,7 @@ class BookmarkPage extends StatelessWidget {
                                   },
                                   separatorBuilder: (context, index) {
                                     return Divider(
-                                      thickness: 4,
+                                      thickness: 1,
                                       color: dividerColor,
                                     );
                                   },

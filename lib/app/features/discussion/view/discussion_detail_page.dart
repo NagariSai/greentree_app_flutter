@@ -35,6 +35,7 @@ class _DiscussionDetailPageState extends State<DiscussionDetailPage> {
   Widget build(BuildContext context) {
     print("diss");
     return Scaffold(
+      backgroundColor: bodybgColor,
       resizeToAvoidBottomInset: true,
       appBar: CustomAppBar(
         title: "",
@@ -56,7 +57,7 @@ class _DiscussionDetailPageState extends State<DiscussionDetailPage> {
                                 child: Column(
                                   children: [
                                     Container(
-                                        padding: EdgeInsets.symmetric(
+                                        padding: EdgeInsets.symmetric(vertical: 8,
                                             horizontal: 16),
                                         child: Column(
                                             crossAxisAlignment:
@@ -118,7 +119,7 @@ class _DiscussionDetailPageState extends State<DiscussionDetailPage> {
                                                 height: 8,
                                               ),
                                               Divider(
-                                                thickness: 4,
+                                                thickness: 1,
                                                 color: dividerColor,
                                               ),
                                               SizedBox(

@@ -281,7 +281,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       builder: (BuildContext context) => CupertinoActionSheet(
           actions: <Widget>[
 
-          CupertinoActionSheetAction(
+         /* CupertinoActionSheetAction(
               child: CustomText(
                 text: "Share on instagram",
                 size: 17,
@@ -299,7 +299,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 });
                 // Navigator.pop(context, 'discussion');
               },
-            ),
+            ),*/
             CupertinoActionSheetAction(
               child: CustomText(
                 text: "Start a discussion",

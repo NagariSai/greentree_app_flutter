@@ -13,6 +13,7 @@ class ChangePasswordPage extends GetWidget<ChangePasswordController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
+        backgroundColor: bodybgColor,
         primary: true,
         appBar: CustomAppBar(
           title: "Reset Password",

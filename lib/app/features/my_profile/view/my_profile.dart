@@ -37,6 +37,7 @@ class _MyProfilePageState extends State<MyProfilePage>
     print("Edit= ${Get.find<ProfileController>().isEdit.value}");
     return GetX<ProfileController>(builder: (_) {
       return Scaffold(
+        backgroundColor: bodybgColor,
         appBar: CustomAppBar(
           negativeText: _.isEdit.value ? "Cancel" : null,
           positiveText: _.isEdit.value ? "Save" : null,
@@ -49,6 +50,7 @@ class _MyProfilePageState extends State<MyProfilePage>
           },
         ),
         body: Scaffold(
+          backgroundColor: bodybgColor,
           body: GetBuilder<ProfileController>(builder: (_) {
             return _.isProfileLoading
                 ? Center(child: CircularProgressIndicator())
